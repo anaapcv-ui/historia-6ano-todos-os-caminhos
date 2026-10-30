@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado · Todos os Caminhos · História 6º</title>
+<style>
+  :root{--palco:#14161c;--palco2:#1d2029;--aco:#343846;--aco2:#4a4f60;--ambar:#f2c14e;--magenta:#e08a3c;--ciano:#c06be0;--verde:#7fcf6a;--vermelho:#e0403f;--texto:#f1ece2;--cinza:#a39e94}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:radial-gradient(1100px 480px at 50% -10%,#11193a,#14161c 60%),var(--palco);color:var(--texto);line-height:1.6;padding-bottom:60px}
+  header{background:linear-gradient(120deg,#0b1430,#122052);padding:26px 18px;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.5);border-bottom:6px solid var(--vermelho)}
+  header .selo{font-size:.78rem;letter-spacing:2px;color:#e2d8ea;text-transform:uppercase}
+  header h1{font-size:1.5rem;margin:6px 0 2px}
+  header p{color:#dbe4fa;font-size:.92rem}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .barra-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+  .barra-nav a{background:var(--palco2);color:var(--texto);text-decoration:none;padding:7px 12px;border-radius:20px;font-size:.85rem;border:1px solid var(--aco)}
+  .barra-nav a.on{background:var(--vermelho);color:#fff;font-weight:bold}
+  .intro{background:var(--palco2);border:1px solid var(--aco);border-radius:14px;padding:16px;margin-bottom:16px}
+  .intro h2{color:#ff8a89;font-size:1.1rem;margin-bottom:8px}
+  .painel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;background:var(--palco2);border:1px solid var(--aco);border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:.85rem}
+  .painel .btns{display:flex;gap:6px;flex-wrap:wrap}
+  button{cursor:pointer;font-family:inherit}
+  .mini{background:var(--palco);color:var(--texto);border:1px solid var(--aco2);border-radius:8px;padding:6px 10px;font-size:.8rem}
+  .codigo{background:linear-gradient(120deg,#122a1f,#1b4d36);border:2px solid var(--verde);border-radius:14px;padding:16px;text-align:center;margin-bottom:16px;display:none}
+  .codigo.show{display:block}
+  .codigo .cod{font-size:1.8rem;font-weight:bold;letter-spacing:3px;color:#8fe0b4;margin:6px 0}
+  .progresso{height:10px;background:var(--aco);border-radius:6px;overflow:hidden;margin-bottom:16px}
+  .progresso div{height:100%;background:var(--vermelho);width:0;transition:width .3s}
+  .q{background:var(--palco2);border:1px solid var(--aco);border-radius:16px;padding:16px;margin-bottom:14px}
+  .q .num{color:#ff8a89;font-weight:bold;font-size:.8rem;letter-spacing:1px;text-transform:uppercase}
+  .q .tipo{float:right;font-size:.7rem;color:#fff;border-radius:10px;padding:2px 8px;background:#2a3a5a}
+  .q .tipo.rom{background:#1f5a4a}
+  .q h3{font-size:1rem;margin:6px 0 10px;font-weight:600}
+  .afirm{background:#1a1c24;border-left:3px solid var(--aco2);padding:8px 12px;margin:6px 0;border-radius:0 8px 8px 0;font-size:.93rem}
+  .afirm.ok{border-left-color:var(--verde)}.afirm.no{border-left-color:#777;color:#aaa}
+  .alt{display:block;background:#1a1c24;border:1px solid var(--aco2);border-radius:10px;padding:10px 12px;margin:6px 0;cursor:pointer}
+  .alt:hover{border-color:#ff8a89}
+  .alt input{margin-right:8px}
+  .alt.sel{border-color:#ff8a89;background:#2a1620}
+  .alt.certa{border-color:var(--verde);background:#0e2b1f}
+  .alt.errada{border-color:#555;background:#171a28;color:#aaa}
+  .alt.marcada-errada{border-color:var(--vermelho);background:#3a1414}
+  .exp{margin-top:8px;font-size:.88rem;padding:8px 10px;border-radius:8px;background:#1a1c24;border-left:3px solid var(--ambar);display:none}
+  .exp.show{display:block}
+  .enviar{width:100%;background:var(--vermelho);color:#fff;border:none;border-radius:12px;padding:14px;font-size:1.05rem;font-weight:bold;margin:10px 0}
+  .enviar:disabled{background:#2a2d38;color:#6f7794;cursor:not-allowed}
+  .gab{background:var(--palco2);border:1px dashed var(--ciano);border-radius:14px;padding:16px;margin:16px 0;display:none}
+  .gab.show{display:block}
+  .gab input{padding:9px;border-radius:8px;border:1px solid var(--aco2);background:#101217;color:var(--texto);font-size:1rem;width:180px;text-transform:uppercase}
+  .gab button{background:var(--ciano);color:#1a0826;border:none;border-radius:8px;padding:9px 14px;font-weight:bold;margin-left:6px}
+  .gab .msg{margin-top:8px;font-size:.9rem}
+  .fim{background:linear-gradient(120deg,#122a1f,#163a2a);border:2px solid var(--verde);border-radius:16px;padding:18px;margin-top:18px;text-align:center}
+  .fim h3{color:#8fe0b4;margin-bottom:8px}
+  .fim a{display:inline-block;margin-top:8px;background:var(--verde);color:#04231a;text-decoration:none;font-weight:bold;padding:11px 20px;border-radius:10px}
+  .modal-bg{display:none;position:fixed;inset:0;background:rgba(5,4,8,.96);z-index:50;align-items:center;justify-content:center;padding:16px}
+  .modal-bg.show{display:flex}
+  .modal{background:var(--palco2);border:1px solid var(--ciano);border-radius:14px;padding:22px;max-width:440px;text-align:center}
+  .modal p{margin-bottom:14px}
+  .modal .big{font-size:2.2rem}
+  .modal a,.modal button{display:inline-block;background:var(--ciano);color:#1a0826;border:none;border-radius:8px;padding:10px 18px;font-weight:bold;text-decoration:none}
+  .rodape{text-align:center;color:var(--cinza);font-size:.8rem;margin-top:24px}
+</style>
+</head>
+<body>
+<header>
+  <div class="selo">Todos os Caminhos · História 6º ano · CCF</div>
+  <h1>📝 Simulado</h1>
+  <p>26 questões no estilo da prova · múltipla escolha e números romanos · Código SIM</p>
+</header>
+
+<div class="wrap">
+  <nav class="barra-nav" id="nav">
+    <a href="leitura-guiada.html">📖 Leitura Guiada</a>
+    <a href="quiz.html">🎯 Quiz</a>
+    <a href="resumo.html">🗺️ Resumo</a>
+    <a class="on" href="simulado.html">📝 Simulado</a>
+    <a href="index.html">🏠 Início</a>
+  </nav>
+
+  <div class="codigo" id="codigo"><div>Seu código de liberação</div><div class="cod" id="cod"></div><div id="codtxt"></div></div>
+
+  <div class="intro">
+    <h2>📝 Chegada ao Fórum: valendo!</h2>
+    <p>Faça como se fosse a prova: <b>26 questões</b>, todas obrigatórias. Há questões de <b>múltipla escolha</b> e <b>3 de números romanos</b> (leia as afirmativas I, II, III e IV e escolha a alternativa correta). Depois de enviar, as respostas travam e sai o código <b>SIM</b>.</p>
+  </div>
+
+  <div class="painel">
+    <span id="salvo">💾 Progresso salvo automaticamente.</span>
+    <div class="btns">
+      <button class="mini" onclick="exportar()">📥 Exportar</button>
+      <button class="mini" onclick="document.getElementById('imp').click()">📤 Importar</button>
+      <input type="file" id="imp" accept="application/json" style="display:none" onchange="importar(event)">
+      <button class="mini" onclick="pedirZerar()">🗑️ Zerar tudo</button>
+    </div>
+  </div>
+
+  <div class="progresso"><div id="barra"></div></div>
+  <div id="questoes"></div>
+  <button class="enviar" id="btn-enviar" onclick="enviar()" disabled>📨 Enviar simulado (responda todas)</button>
+
+  <div class="gab" id="gab">
+    <b>🔑 Gabarito comentado:</b> digite o código SIM que apareceu no topo.<br>
+    <input id="gab-in" placeholder="SIM-XX-YY"><button onclick="abrirGab()">Ver gabarito</button>
+    <div class="msg" id="gab-msg"></div>
+  </div>
+
+  <div class="fim" id="fim" style="display:none">
+    <h3>🏁 Trilha completa!</h3>
+    <p>Você percorreu os quatro materiais na ordem. Agora tudo fica aberto para revisar quantas vezes quiser até a prova.</p>
+    <a href="index.html">🏠 Voltar ao início</a>
+  </div>
+
+  <div class="rodape">Feito com carinho para o jovem aprendiz. 🛣️ Boa prova!</div>
+</div>
+
+<div class="modal-bg" id="lock">
+  <div class="modal">
+    <div class="big">🔒</div>
+    <p><b>Esta etapa ainda está trancada.</b></p>
+    <p id="lock-txt">Para abrir o Simulado, leia o Resumo até o fim.</p>
+    <a href="index.html">Voltar ao início</a>
+  </div>
+</div>
+<div class="modal-bg" id="modal" style="background:rgba(0,0,0,.75)">
+  <div class="modal">
+    <p id="modal-txt"></p>
+    <button onclick="fecharModal()" id="modal-ok">Ok</button>
+    <button class="mini" onclick="fecharModal()" id="modal-cancel" style="display:none;margin-left:8px">Cancelar</button>
+  </div>
+</div>
+
+<script>
+/* ====== TRILHA COM CADEADOS (módulo comum do kit) ====== */
+var KIT='caminhos_hist6';
+var TRILHA=[
+ {id:'leitura', chave:KIT+'_leitura_v1', nome:'Leitura Guiada', arquivo:'leitura-guiada.html', emoji:'📖'},
+ {id:'quiz', chave:KIT+'_quiz_v1', nome:'Quiz', arquivo:'quiz.html', emoji:'🎯'},
+ {id:'resumo', chave:KIT+'_resumo_v1', nome:'Resumo', arquivo:'resumo.html', emoji:'🗺️'},
+ {id:'simulado', chave:KIT+'_simulado_v1', nome:'Simulado', arquivo:'simulado.html', emoji:'📝'}
+];
+function lerJSON(k){ try{ var s=localStorage.getItem(k); return s?JSON.parse(s):null; }catch(e){ return null; } }
+function trilhaLiberada(){ var t=lerJSON(KIT+'_trilha_v1'); return !!(t&&t.liberadoPelosPais); }
+function etapaConcluida(id){ var e=TRILHA.filter(function(t){return t.id===id;})[0]; var d=lerJSON(e.chave); return !!(d&&d.concluido); }
+function podeAbrir(id){ var idx=TRILHA.map(function(t){return t.id;}).indexOf(id); if(idx<=0||trilhaLiberada()) return true; return etapaConcluida(TRILHA[idx-1].id); }
+function checarTrava(){
+  if(podeAbrir('simulado')) return true;
+  var txt='Para abrir o Simulado, leia o Resumo até o fim e clique em "Li o resumo até o fim".';
+  if(!etapaConcluida('quiz')) txt='Para abrir o Simulado, envie o Quiz e leia o Resumo até o fim.';
+  if(!etapaConcluida('leitura')) txt='Para abrir o Simulado, conclua a Leitura Guiada, envie o Quiz e leia o Resumo até o fim.';
+  document.getElementById('lock-txt').textContent=txt;
+  document.getElementById('lock').classList.add('show');
+  document.querySelector('.wrap').style.filter='blur(6px)';
+  return false;
+}
+
+/* ====== QUESTÕES (Callis História 6 – Livro 2, caps. 14, 15 e 19) — correta guardada pelo id ====== */
+var Q=[
+ {tipo:"mc",p:"Os povos italiotas, que habitavam a península Itálica, eram principalmente:",alts:[
+  {id:"a",t:"sabinos, úmbrios, samnitas e latinos.",ok:true,e:"São os principais povoadores citados na p. 9."},
+  {id:"b",t:"egípcios, persas e fenícios.",e:"Esses povos não são os italiotas."},
+  {id:"c",t:"gauleses, germanos e celtas.",e:"Os celtas viviam na região, mas não são chamados de italiotas; gauleses e germanos não aparecem nessa lista."},
+  {id:"d",t:"atenienses, espartanos e macedônios.",e:"São gregos; os gregos do sul da península formavam a Magna Grécia."}]},
+ {tipo:"mc",p:"O local escolhido para a cidade de Roma, o Monte Aventino, era estratégico porque:",alts:[
+  {id:"a",t:"ficava perto do rio Tibre.",ok:true,e:"A proximidade com o rio Tibre tornava o lugar estratégico (p. 10)."},
+  {id:"b",t:"ficava no litoral de Cartago.",e:"Cartago ficava no norte da África, do outro lado do Mediterrâneo."},
+  {id:"c",t:"era o ponto mais alto da Grécia.",e:"O Monte Aventino fica na península Itálica."},
+  {id:"d",t:"era uma ilha isolada, longe de outros povos.",e:"Pelo contrário: as aldeias se uniram justamente porque eram ameaçadas por outros povos."}]},
+ {tipo:"mc",p:"Na linha do tempo do livro, a República Romana vai de:",alts:[
+  {id:"a",t:"509 a.C. a 27 a.C.",ok:true,e:"Monarquia: 753–509 a.C.; República: 509–27 a.C.; Império: 27 a.C.–476 d.C."},
+  {id:"b",t:"753 a.C. a 509 a.C.",e:"Esse é o período da Monarquia."},
+  {id:"c",t:"27 a.C. a 476 d.C.",e:"Esse é o período do Império."},
+  {id:"d",t:"264 a.C. a 146 a.C.",e:"Esse é o período das Guerras Púnicas, dentro da República."}]},
+ {tipo:"mc",p:"Os patrícios eram a elite da sociedade romana porque:",alts:[
+  {id:"a",t:"descendiam das famílias proprietárias de terras, herdadas dos antepassados.",ok:true,e:"Os privilégios vinham do nascimento (pp. 11 e 12)."},
+  {id:"b",t:"eram os melhores soldados do exército.",e:"O livro liga os privilégios à origem familiar e à terra, não à habilidade militar."},
+  {id:"c",t:"eram a maioria da população.",e:"A maioria eram os plebeus."},
+  {id:"d",t:"tinham sido escolhidos pelos plebeus em eleições.",e:"A posição dos patrícios vinha do nascimento."}]},
+ {tipo:"mc",p:"Por volta de 600 a.C., Roma passou a ser governada por reis etruscos. Qual foi a reação dos patrícios?",alts:[
+  {id:"a",t:"Não concordaram, pois perderam influência política, e o Senado deu um golpe que expulsou os etruscos.",ok:true,e:"Depois da expulsão foi criado um novo governo: a República (p. 12)."},
+  {id:"b",t:"Apoiaram os etruscos para sempre, porque Roma ficou mais moderna.",e:"Roma se modernizou, mas os patrícios eram contra, porque perderam poder."},
+  {id:"c",t:"Fugiram para Cartago e pediram ajuda a Aníbal.",e:"Isso não aconteceu; Aníbal viveu séculos depois."},
+  {id:"d",t:"Entregaram o governo aos plebeus.",e:"Os plebeus continuaram sem participar das decisões."}]},
+ {tipo:"mc",p:"Na República, qual magistrado era responsável por cobrar os impostos e administrar o tesouro?",alts:[
+  {id:"a",t:"O questor.",ok:true,e:"Aos questores cabia o gerenciamento do dinheiro do Estado (p. 15)."},
+  {id:"b",t:"O pretor.",e:"O pretor cuidava da justiça."},
+  {id:"c",t:"O cônsul.",e:"Os cônsules eram a autoridade executiva máxima."},
+  {id:"d",t:"O tribuno da plebe.",e:"O tribuno podia vetar leis que prejudicassem os plebeus."}]},
+ {tipo:"mc",p:"Na Assembleia das Centúrias, quem não tinha renda para se armar:",alts:[
+  {id:"a",t:"não integrava o exército e, por isso, não participava da assembleia.",ok:true,e:"As centúrias eram grupos do exército divididos pela renda (p. 16)."},
+  {id:"b",t:"recebia armas do Estado e votava normalmente.",e:"O exército não era permanente: cada cidadão se armava como podia."},
+  {id:"c",t:"virava automaticamente senador.",e:"O Senado era formado por patrícios."},
+  {id:"d",t:"era nomeado tribuno da plebe.",e:"O tribuno era eleito pelos plebeus, não escolhido por falta de renda."}]},
+ {tipo:"mc",p:"O tribuno da plebe, conquistado por volta de 494 a.C., tinha o poder de:",alts:[
+  {id:"a",t:"vetar leis do Senado que prejudicassem os plebeus.",ok:true,e:"Foi uma conquista da luta dos plebeus (pp. 13 e 15)."},
+  {id:"b",t:"escolher o próximo rei de Roma.",e:"Na Monarquia, quem escolhia o sucessor do rei era o Senado."},
+  {id:"c",t:"comandar o exército em tempos de crise.",e:"Em crises, o Senado indicava um ditador."},
+  {id:"d",t:"cunhar moedas com o próprio rosto.",e:"As moedas com rosto eram dos imperadores."}]},
+ {tipo:"mc",p:"A Lei Canuleia (445 a.C.) foi importante porque:",alts:[
+  {id:"a",t:"permitiu o casamento entre patrícios e plebeus.",ok:true,e:"Antes, esse casamento era proibido (p. 13)."},
+  {id:"b",t:"acabou com a escravidão por dívida.",e:"Isso foi em 366 a.C."},
+  {id:"c",t:"criou o primeiro código de leis escritas.",e:"Essa foi a Lei das Doze Tábuas (450 a.C.)."},
+  {id:"d",t:"distribuiu as terras dos patrícios aos pobres.",e:"A questão da terra continuou sendo motivo de conflito."}]},
+ {tipo:"mc",p:"Na 2ª Guerra Púnica (218–202 a.C.):",alts:[
+  {id:"a",t:"o general cartaginês Aníbal invadiu a península Itálica, mas Roma venceu e Cartago perdeu a região da atual Espanha.",ok:true,e:"É o que o livro conta na p. 18."},
+  {id:"b",t:"Roma foi destruída e coberta de sal pelos cartagineses.",e:"Foi Cartago que foi destruída, na 3ª Guerra Púnica."},
+  {id:"c",t:"Roma conquistou pela primeira vez a Sicília, a Sardenha e a Córsega.",e:"Isso foi na 1ª Guerra Púnica."},
+  {id:"d",t:"Júlio César atravessou o Rubicão.",e:"Isso aconteceu em 49 a.C., muito depois."}]},
+ {tipo:"mc",p:"Depois das Guerras Púnicas, o domínio do Mediterrâneo trouxe para Roma:",alts:[
+  {id:"a",t:"o controle do comércio da região e mais escravos, vindos dos prisioneiros de guerra.",ok:true,e:"O Mare Nostrum fortaleceu o comércio e a estrutura escravista (p. 20)."},
+  {id:"b",t:"o fim da escravidão no território romano.",e:"Aconteceu o contrário: os escravos aumentaram."},
+  {id:"c",t:"a perda de todas as terras da península Itálica.",e:"Roma ficou ainda mais poderosa."},
+  {id:"d",t:"a adoção do cristianismo como religião oficial.",e:"Isso só aconteceu em 380 d.C."}]},
+ {tipo:"mc",p:"Os latifúndios que surgiram no fim da República eram:",alts:[
+  {id:"a",t:"grandes propriedades rurais da elite, que usavam mão de obra escravizada.",ok:true,e:"Definição da p. 28."},
+  {id:"b",t:"pequenos sítios de camponeses livres.",e:"Os pequenos produtores eram justamente os prejudicados pelos latifúndios."},
+  {id:"c",t:"casas de banho públicas.",e:"Essas eram as termas."},
+  {id:"d",t:"praças no centro das cidades.",e:"A praça central era o fórum."}]},
+ {tipo:"mc",p:"Caio Graco, irmão de Tibério, conseguiu aprovar leis que:",alts:[
+  {id:"a",t:"aumentaram a participação dos plebeus e diminuíram o preço dos alimentos para os mais pobres.",ok:true,e:"Mesmo assim, os conflitos continuaram e ele foi morto (p. 30)."},
+  {id:"b",t:"aumentaram as terras dos senadores.",e:"Os Graco defendiam os pobres, não os senadores."},
+  {id:"c",t:"transformaram Roma num império.",e:"Quem iniciou o Império foi Otávio Augusto."},
+  {id:"d",t:"proibiram o paganismo.",e:"O paganismo foi proibido só no fim do século IV."}]},
+ {tipo:"mc",p:"Durante as guerras civis do fim da República, os generais (imperatores) passaram a ter poder político porque:",alts:[
+  {id:"a",t:"usavam a fidelidade dos seus soldados para intimidar o Senado.",ok:true,e:"O exército ficou cada vez mais fortalecido no caos das guerras civis (p. 30)."},
+  {id:"b",t:"eram escolhidos pelos plebeus nas assembleias.",e:"O poder deles vinha dos exércitos."},
+  {id:"c",t:"eram descendentes de Rômulo.",e:"O livro não dá essa explicação."},
+  {id:"d",t:"tinham sido escravos e lideravam revoltas.",e:"Os generais não eram escravos."}]},
+ {tipo:"mc",p:"Em 49 a.C., Júlio César atravessou o Rubicão com o seu exército. Esse fato marca que ele:",alts:[
+  {id:"a",t:"invadiu Roma e se tornou ditador vitalício.",ok:true,e:"O Rubicão era o riacho que delimitava a sua província (p. 31)."},
+  {id:"b",t:"foi assassinado por membros do Senado.",e:"Isso aconteceu em 15 de março de 44 a.C."},
+  {id:"c",t:"recebeu o título de Augusto.",e:"Quem recebeu esse título foi Caio Otávio, em 27 a.C."},
+  {id:"d",t:"perdeu a guerra para Pompeu.",e:"Foi César quem venceu a disputa com Pompeu."}]},
+ {tipo:"mc",p:"O título de Augusto, usado por Caio Otávio a partir de 27 a.C., significa:",alts:[
+  {id:"a",t:"“sagrado”, “elevado”, uma exaltação ao soberano.",ok:true,e:"Vem do latim augustus (p. 31)."},
+  {id:"b",t:"“governo de três homens”.",e:"Esse é o sentido de triunvirato."},
+  {id:"c",t:"“coisa pública”.",e:"Esse é o sentido de república."},
+  {id:"d",t:"“morador do campo”.",e:"Esse é o sentido de paganus, origem de “pagão”."}]},
+ {tipo:"mc",p:"Uma fachada com um topo triangular apoiado em colunas organizadas de forma simétrica (como na Casa Branca, nos EUA) mostra:",alts:[
+  {id:"a",t:"o frontão e a colunata, elementos gregos que os romanos adotaram.",ok:true,e:"Os romanos mantiveram esse estilo grego de fachada (p. 33)."},
+  {id:"b",t:"o arco, criação romana para comemorar vitórias.",e:"O arco é curvo; o topo triangular é o frontão."},
+  {id:"c",t:"a abóbada, cobertura curva entre arcos e muros.",e:"A abóbada é curva, não triangular."},
+  {id:"d",t:"o aqueduto, que transportava água.",e:"O aqueduto não é uma fachada de edifício."}]},
+ {tipo:"mc",p:"As termas romanas eram:",alts:[
+  {id:"a",t:"banhos públicos com saunas, piscinas e salas de ginástica, frequentados por várias classes sociais.",ok:true,e:"Eram abastecidas pelos aquedutos (pp. 34 e 35)."},
+  {id:"b",t:"templos fechados onde só os sacerdotes entravam.",e:"As termas eram públicas e frequentadas por muita gente."},
+  {id:"c",t:"arenas de luta de gladiadores.",e:"As lutas ocorriam nos anfiteatros (coliseus)."},
+  {id:"d",t:"escolas de latim clássico.",e:"As termas eram lugares de banho e encontro."}]},
+ {tipo:"mc",p:"Na família romana, de modelo patriarcal, as mulheres:",alts:[
+  {id:"a",t:"podiam ter propriedades e estudar, mas não podiam votar nem ser eleitas.",ok:true,e:"Elas não eram consideradas cidadãs (p. 36)."},
+  {id:"b",t:"comandavam a família e tinham poder sobre os filhos casados.",e:"Quem tinha esse poder era o pai de família."},
+  {id:"c",t:"podiam ser eleitas cônsules.",e:"As mulheres não ocupavam cargos políticos."},
+  {id:"d",t:"eram proibidas de sair de casa.",e:"Elas podiam frequentar banquetes e reuniões sociais."}]},
+ {tipo:"mc",p:"As sacerdotisas vestais tinham como principal tarefa:",alts:[
+  {id:"a",t:"manter sempre aceso o fogo sagrado da deusa Vesta.",ok:true,e:"Se o fogo se apagasse, a vestal era punida severamente (p. 37)."},
+  {id:"b",t:"lutar como gladiadoras no Coliseu.",e:"As vestais tinham um papel religioso."},
+  {id:"c",t:"cobrar os impostos das províncias.",e:"Isso era tarefa de magistrados, como os questores."},
+  {id:"d",t:"escrever a Lei das Doze Tábuas.",e:"Isso não tem relação com as vestais."}]},
+ {tipo:"mc",p:"O processo de romanização das províncias pode ser identificado:",alts:[
+  {id:"a",t:"pela construção de fóruns, estradas e aquedutos e pela circulação de moedas com o rosto do imperador.",ok:true,e:"Símbolos e costumes de Roma se espalharam pelo Império (p. 40)."},
+  {id:"b",t:"pela proibição de qualquer costume local.",e:"Os povos podiam manter seus costumes, desde que respeitassem o culto oficial, as leis e os impostos."},
+  {id:"c",t:"pelo fim dos impostos nas províncias.",e:"Os povos dominados tinham obrigações tributárias com o imperador."},
+  {id:"d",t:"pela adoção do grego como língua de todos.",e:"A língua espalhada foi o latim."}]},
+ {tipo:"mc",p:"As línguas que se originaram do latim, como o português, o espanhol e o romeno, são chamadas de:",alts:[
+  {id:"a",t:"latinas, neolatinas ou românicas.",ok:true,e:"Os três nomes aparecem no livro (pp. 14 e 90)."},
+  {id:"b",t:"germânicas.",e:"Não é o nome usado para as línguas vindas do latim."},
+  {id:"c",t:"púnicas.",e:"Púnicos era o nome que os romanos davam aos fenícios."},
+  {id:"d",t:"etruscas.",e:"Os etruscos eram um povo da península Itálica."}]},
+ {tipo:"mc",p:"Em 380, pelo Edito de Tessalônica, o imperador Teodósio I:",alts:[
+  {id:"a",t:"tornou o cristianismo a religião oficial do Império Romano.",ok:true,e:"Depois disso, o paganismo passou a ser punido (p. 92)."},
+  {id:"b",t:"proibiu o cristianismo em todo o Império.",e:"Foi o contrário."},
+  {id:"c",t:"criou a Lei das Doze Tábuas.",e:"Ela é de 450 a.C."},
+  {id:"d",t:"dividiu Roma em três triunviratos.",e:"Os triunviratos foram no fim da República."}]},
+ {tipo:"rom",p:"Analise as afirmativas sobre a REPÚBLICA ROMANA (Capítulo 14):",itens:[
+  {n:"I",t:"O Senado, formado só por patrícios, era o órgão mais poderoso da República.",ok:true,e:"Correta: por isso os plebeus seguiam sem participar das decisões."},
+  {n:"II",t:"Os censores eram responsáveis pelo policiamento e pelo abastecimento da cidade.",e:"Errada: isso era tarefa dos edis. Os censores contavam os cidadãos."},
+  {n:"III",t:"As grandes conquistas territoriais de Roma aconteceram no período republicano, sob o comando do Senado.",ok:true,e:"Correta: o livro destaca que não foi no Império."},
+  {n:"IV",t:"As conquistas dos plebeus acabaram com a desigualdade social entre plebeus e patrícios.",e:"Errada: a questão da terra continuou causando conflitos."}],
+  alts:[{id:"a",t:"Apenas I e III.",ok:true,e:"I e III são corretas; II e IV estão erradas."},{id:"b",t:"Apenas II e IV.",e:"Essas são justamente as erradas."},{id:"c",t:"Apenas I, II e III.",e:"A II é errada."},{id:"d",t:"Todas as afirmativas.",e:"II e IV são erradas."}]},
+ {tipo:"rom",p:"Analise as afirmativas sobre o IMPÉRIO ROMANO (Capítulo 15):",itens:[
+  {n:"I",t:"A sucessão imperial era hereditária: o trono passava sempre para o filho de sangue do imperador.",e:"Errada: o imperador indicava e adotava o sucessor."},
+  {n:"II",t:"A economia romana era comercial e monetária e dependia muito do trabalho escravo.",ok:true,e:"Correta: trocas com as províncias, moedas e escravidão."},
+  {n:"III",t:"No governo de Trajano, o Império chegou à sua máxima extensão.",ok:true,e:"Correta: cerca de 5 milhões de km²."},
+  {n:"IV",t:"A política do pão e circo distribuía alimentos e espetáculos para conquistar o apoio do povo.",ok:true,e:"Correta: era usada principalmente em períodos de crise."}],
+  alts:[{id:"a",t:"Apenas II, III e IV.",ok:true,e:"Só a I está errada."},{id:"b",t:"Apenas I e II.",e:"A I é errada."},{id:"c",t:"Apenas I, III e IV.",e:"A I é errada e faltou a II."},{id:"d",t:"Apenas III.",e:"II e IV também são corretas."}]},
+ {tipo:"rom",p:"Analise as afirmativas sobre o LEGADO CULTURAL DOS ROMANOS (Capítulo 19):",itens:[
+  {n:"I",t:"O latim clássico era o usado na escrita e pelas classes mais altas.",ok:true,e:"Correta: o latim vulgar era o informal, do dia a dia."},
+  {n:"II",t:"O latim vulgar era falado apenas pelos imperadores.",e:"Errada: era falado por soldados, mercadores, colonos e moradores das províncias."},
+  {n:"III",t:"A jurisprudência é a ideia de que um julgamento deve se basear em decisões anteriores sobre o mesmo assunto.",ok:true,e:"Correta: surgiu a partir do Direito romano."},
+  {n:"IV",t:"No Império, o Direito romano foi dividido em Jus civile, Jus gentium e Jus naturale.",ok:true,e:"Correta: Direito civil, dos povos e natural."}],
+  alts:[{id:"a",t:"Apenas I, III e IV.",ok:true,e:"Só a II está errada."},{id:"b",t:"Apenas I e II.",e:"A II é errada."},{id:"c",t:"Apenas II e IV.",e:"A II é errada e faltaram I e III."},{id:"d",t:"Todas as afirmativas.",e:"A II é errada."}]}
+];
+
+
+/* ====== EMBARALHAMENTO COM SEMENTE FIXA (mulberry32) — correta guardada pelo id ====== */
+function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+var rnd=mulberry32(311026000);
+Q.forEach(function(q){ if(q.alts){ var arr=q.alts.slice(); for(var i=arr.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var tmp=arr[i]; arr[i]=arr[j]; arr[j]=tmp; } q.ordem=arr; } });
+var OBJ=Q.length;
+
+/* ====== ESTADO ====== */
+var CHAVE=KIT+'_simulado_v1'; var mem={}; var estado=carregar();
+function carregar(){ try{ var s=localStorage.getItem(CHAVE); if(s) return JSON.parse(s);}catch(e){ if(mem[CHAVE]) return JSON.parse(mem[CHAVE]); } return {resp:{},enviado:false}; }
+function salvar(){ var s=JSON.stringify(estado); try{ localStorage.setItem(CHAVE,s);}catch(e){ mem[CHAVE]=s; } var d=new Date(); document.getElementById('salvo').textContent='💾 Salvo às '+d.toLocaleTimeString('pt-BR')+' de '+d.toLocaleDateString('pt-BR'); }
+var LETRAS='ABCDEFGHJKLMNPQRSTUVWXYZ';
+function gerarCodigo(ac){ var xx=(ac<10?'0':'')+ac; var yy=LETRAS[Math.floor(Math.random()*LETRAS.length)]+LETRAS[Math.floor(Math.random()*LETRAS.length)]; return 'SIM-'+xx+'-'+yy; }
+function respondida(i){ var r=estado.resp[i]; return !(r===undefined||r===null||r===''); }
+function acertou(i){ var q=Q[i], r=estado.resp[i]; var a=q.alts.filter(function(x){return x.id===r;})[0]; return !!(a&&a.ok); }
+
+function render(){
+  var c=document.getElementById('questoes'); var h=''; var G=estado.gabarito;
+  Q.forEach(function(q,i){
+    var tipoTxt={mc:'Múltipla escolha',rom:'Números romanos'}[q.tipo];
+    h+='<div class="q" id="q'+i+'"><span class="tipo '+q.tipo+'">'+tipoTxt+'</span><div class="num">Questão '+(i+1)+' de '+Q.length+'</div><h3>'+q.p+'</h3>';
+    if(q.tipo==='rom'){
+      q.itens.forEach(function(it){ var cls='afirm'+(G?(it.ok?' ok':' no'):''); h+='<div class="'+cls+'">'+it.n+'. '+it.t+(G?'<div class="exp show">'+(it.ok?'✅ ':'❌ ')+it.e+'</div>':'')+'</div>'; });
+    }
+    q.ordem.forEach(function(a,k){
+      var letra='abcd'[k]; var sel=estado.resp[i]===a.id; var cls='alt'+(sel?' sel':'');
+      if(G){ if(a.ok) cls+=' certa'; else if(sel) cls+=' marcada-errada'; else cls+=' errada'; }
+      h+='<label class="'+cls+'"><input type="radio" name="q'+i+'" value="'+a.id+'" '+(sel?'checked':'')+' '+(estado.enviado?'disabled':'')+' onchange="marcar('+i+',\''+a.id+'\')"> <b>'+letra+')</b> '+a.t+(G?'<div class="exp show">'+(a.ok?'✅ ':'')+a.e+'</div>':'')+'</label>';
+    });
+    h+='</div>';
+  });
+  c.innerHTML=h; atualizarBarra(); if(estado.enviado) mostrarEnviado();
+}
+function marcar(i,v){ if(estado.enviado) return; estado.resp[i]=v; salvar(); var q=document.getElementById('q'+i); var labs=q.querySelectorAll('.alt'); for(var k=0;k<labs.length;k++){ labs[k].classList.toggle('sel', labs[k].querySelector('input').value===v); } atualizarBarra(); }
+function atualizarBarra(){ var n=0; Q.forEach(function(q,i){ if(respondida(i)) n++; }); document.getElementById('barra').style.width=(n/Q.length*100)+'%'; var b=document.getElementById('btn-enviar'); if(!estado.enviado){ b.disabled=n<Q.length; b.textContent=n<Q.length?'📨 Enviar simulado ('+n+' de '+Q.length+' respondidas)':'📨 Enviar simulado'; } }
+function enviar(){
+  if(estado.enviado) return;
+  var ac=0; Q.forEach(function(q,i){ if(acertou(i)===true) ac++; });
+  estado.acertos=ac; estado.objetivas=OBJ; estado.codigo=gerarCodigo(ac); estado.enviado=true; estado.concluido=true; estado.concluidoEm=new Date().toISOString();
+  salvar(); render(); window.scrollTo({top:0,behavior:'smooth'});
+}
+function mostrarEnviado(){
+  var b=document.getElementById('btn-enviar'); b.disabled=true; b.textContent='✅ Simulado enviado — respostas travadas';
+  document.getElementById('codigo').classList.add('show'); document.getElementById('cod').textContent=estado.codigo;
+  document.getElementById('codtxt').textContent='Anote este código para os pais. Ele abre o gabarito comentado.';
+  document.getElementById('gab').classList.add('show'); document.getElementById('fim').style.display='block';
+}
+function abrirGab(){ var v=document.getElementById('gab-in').value.trim().toUpperCase(); var m=document.getElementById('gab-msg'); if(v===estado.codigo||v==='PAIS-77'){ estado.gabarito=true; salvar(); render(); m.innerHTML='<span style="color:#8fe0b4">Gabarito liberado: '+estado.acertos+' acertos de '+OBJ+' questões.</span>'; } else { m.innerHTML='<span style="color:#ffb3b3">Código incorreto.</span>'; } }
+function exportar(){ var blob=new Blob([JSON.stringify(estado,null,2)],{type:'application/json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='simulado_todos-os-caminhos.json'; a.click(); }
+function importar(ev){ var f=ev.target.files[0]; if(!f) return; var r=new FileReader(); r.onload=function(){ try{ estado=JSON.parse(r.result); salvar(); render(); mostrarModal('✅ Progresso importado!',false);}catch(e){ mostrarModal('❌ Arquivo inválido.',false);} }; r.readAsText(f); }
+var acaoZerar=null;
+function pedirZerar(){ acaoZerar=true; mostrarModal('Apagar as respostas deste Simulado? (Se ele já foi enviado, o código e a conclusão são mantidos.)',true); }
+function mostrarModal(txt,confirmar){ document.getElementById('modal-txt').innerHTML=txt; document.getElementById('modal').classList.add('show'); document.getElementById('modal-cancel').style.display=confirmar?'inline-block':'none'; document.getElementById('modal-ok').textContent=confirmar?'Sim, apagar':'Ok';
+  document.getElementById('modal-ok').onclick=function(){ if(confirmar&&acaoZerar){ if(!estado.enviado){ estado={resp:{},enviado:false}; salvar(); render(); } else { mostrarModal('O Simulado já foi enviado: as respostas ficam travadas. Para refazer do zero, use "Zerar o kit inteiro" no Início.',false); acaoZerar=null; return; } } acaoZerar=null; fecharModal(); }; }
+function fecharModal(){ document.getElementById('modal').classList.remove('show'); }
+
+if(checarTrava()){ render(); }
+</script>
+</body>
+</html>

@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leitura Guiada · Todos os Caminhos · História 6º</title>
+<style>
+  :root{
+    --palco:#14161c; --palco2:#1d2029; --aco:#343846; --aco2:#4a4f60;
+    --ambar:#f2c14e; --magenta:#e08a3c; --ciano:#c06be0; --verde:#7fcf6a; --verde2:#248a56;
+    --vermelho:#ff5d5d; --texto:#f1ece2; --cinza:#a39e94;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:
+    radial-gradient(1100px 480px at 50% -10%,#2a1838,#14161c 60%),var(--palco);
+    color:var(--texto);line-height:1.6;padding-bottom:60px}
+  header{background:linear-gradient(120deg,#1f1428,#2c1a3a);padding:26px 18px;text-align:center;
+    box-shadow:0 4px 18px rgba(0,0,0,.5);border-bottom:4px solid var(--ciano)}
+  header .selo{font-size:.78rem;letter-spacing:2px;color:#e6c8f2;text-transform:uppercase}
+  header h1{font-size:1.5rem;margin:6px 0 2px}
+  header p{color:#e2d8ea;font-size:.92rem}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .barra-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+  .barra-nav a{background:var(--palco2);color:var(--texto);text-decoration:none;padding:7px 12px;
+    border-radius:20px;font-size:.85rem;border:1px solid var(--aco)}
+  .barra-nav a.on{background:var(--ciano);color:#1a0826;font-weight:bold}
+  .barra-nav a.lock{opacity:.5}
+  .intro{background:var(--palco2);border:1px solid var(--aco);border-radius:14px;padding:16px;margin-bottom:16px}
+  .intro h2{color:var(--ciano);font-size:1.1rem;margin-bottom:8px}
+  .intro ol{margin:8px 0 0 20px}
+  .painel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;
+    background:var(--palco2);border:1px solid var(--aco);border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:.85rem}
+  .painel .btns{display:flex;gap:6px;flex-wrap:wrap}
+  button{cursor:pointer;font-family:inherit}
+  .mini{background:var(--palco);color:var(--texto);border:1px solid var(--aco2);border-radius:8px;padding:6px 10px;font-size:.8rem}
+  .mini:hover{background:#2a2d38}
+  .bloco{background:var(--palco2);border:1px solid var(--aco);border-radius:16px;margin-bottom:18px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.35)}
+  .bloco.travado{opacity:.55}
+  .bloco-cab{display:flex;align-items:center;gap:12px;padding:14px 16px;background:linear-gradient(90deg,#252836,#2b2438);border-bottom:1px solid var(--aco)}
+  .bloco-cab .num{background:var(--ciano);color:#1a0826;font-weight:bold;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .bloco.c16 .bloco-cab .num{background:var(--magenta);color:#3a1500}
+  .bloco-cab h3{font-size:1.06rem;color:#fff}
+  .bloco-cab .porto{font-size:.7rem;color:var(--cinza);letter-spacing:1px;text-transform:uppercase}
+  .bloco-corpo{padding:16px}
+  .texto p{margin-bottom:10px}
+  .texto ul{margin:0 0 10px 20px}
+  .texto li{margin-bottom:5px}
+  .texto .destaque{color:var(--ciano);font-weight:bold}
+  .bloco.c16 .texto .destaque{color:var(--magenta)}
+  .olhar{background:#241a0c;border-left:3px solid var(--amarelo,#f2c14e);border-left-color:var(--ambar);padding:8px 12px;margin:0 0 10px;border-radius:0 8px 8px 0;font-size:.92rem}
+  .olhar b{color:var(--ambar)}
+  .cadeado{padding:22px 16px;text-align:center;color:var(--cinza);font-size:.9rem}
+  .perg{background:#1a1c24;border:1px solid var(--aco);border-radius:12px;padding:12px;margin-top:14px}
+  .perg.red{border-color:var(--vermelho);box-shadow:0 0 0 1px var(--vermelho)}
+  .perg .tag{display:inline-block;font-size:.66rem;text-transform:uppercase;letter-spacing:1px;padding:2px 8px;border-radius:10px;margin-bottom:6px}
+  .tag.conc{background:#0e3a44;color:#8fd9e4}
+  .tag.apl{background:#1d4530;color:#a7e0bf}
+  .perg label{display:block;font-weight:600;margin-bottom:8px}
+  .perg textarea{width:100%;min-height:70px;background:#101217;color:var(--texto);border:1px solid var(--aco2);border-radius:8px;padding:9px;font-family:inherit;font-size:.95rem;resize:vertical}
+  .aviso{margin-top:8px;padding:9px 11px;border-radius:8px;font-size:.85rem;display:none}
+  .aviso.amarelo{display:block;background:#4a3d12;border:1px solid var(--ambar);color:#ffe9ad}
+  .aviso.vermelho{display:block;background:#4a1717;border:1px solid var(--vermelho);color:#ffc9c9}
+  .modelo{margin-top:10px;padding:10px 12px;background:#0e2b1f;border:1px solid var(--verde);border-radius:8px;font-size:.9rem;display:none}
+  .modelo.show{display:block}
+  .modelo .lab{color:#8fe0b4;font-weight:bold;font-size:.78rem;text-transform:uppercase;letter-spacing:1px}
+  .chk{margin-top:10px;font-size:.88rem}
+  .chk .item{display:flex;align-items:center;gap:8px;margin:6px 0;flex-wrap:wrap}
+  .chk .item span{flex:1;min-width:180px}
+  .chk .simnao button{border:1px solid var(--aco2);background:#101217;color:var(--texto);border-radius:6px;padding:4px 10px;margin-left:4px;font-size:.8rem}
+  .chk .simnao button.sim.ativo{background:var(--verde);border-color:var(--verde);color:#04231a}
+  .chk .simnao button.nao.ativo{background:var(--vermelho);border-color:var(--vermelho);color:#fff}
+  .conferir{margin-top:14px;background:var(--verde);color:#04231a;border:none;border-radius:10px;padding:11px 18px;font-size:1rem;font-weight:bold;width:100%}
+  .conferir:disabled{background:#2a2d38;color:#6f7794;cursor:not-allowed}
+  .status-bloco{margin-top:10px;text-align:center;font-weight:bold;font-size:.95rem}
+  .prox{margin-top:12px;text-align:center}
+  .prox a{color:var(--ciano);text-decoration:none;font-weight:bold}
+  .peg{background:#3a1414;border:2px solid var(--vermelho);border-radius:16px;padding:16px;margin-top:20px}
+  .peg h3{color:#ffb3b3;margin-bottom:10px}
+  .peg ol{margin-left:20px}
+  .peg li{margin-bottom:7px}
+  .cobertura{background:var(--palco2);border:1px solid var(--aco);border-radius:16px;padding:16px;margin-top:18px}
+  .cobertura h3{color:var(--ciano);margin-bottom:10px}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th,td{border:1px solid var(--aco);padding:7px 9px;text-align:left}
+  th{background:#252836}
+  .revisar{background:#3a2e06;border:2px solid var(--ambar);border-radius:16px;padding:16px;margin-top:18px}
+  .revisar h3{color:var(--ambar);margin-bottom:8px}
+  .revisar ul{margin-left:18px}
+  .relatorio{background:var(--palco2);border:1px dashed var(--ciano);border-radius:14px;padding:16px;margin-top:18px;font-size:.9rem}
+  .relatorio h3{color:var(--ciano);margin-bottom:8px}
+  .trilha-fim{background:linear-gradient(120deg,#122a1f,#163a2a);border:2px solid var(--verde);border-radius:16px;padding:18px;margin-top:18px;text-align:center}
+  .trilha-fim h3{color:#8fe0b4;margin-bottom:8px}
+  .trilha-fim a.btn{display:inline-block;margin-top:8px;background:var(--verde);color:#04231a;text-decoration:none;font-weight:bold;padding:11px 20px;border-radius:10px}
+  .trilha-fim a.btn.off{background:#2a2d38;color:#6f7794;pointer-events:none}
+  .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:50;align-items:center;justify-content:center;padding:16px}
+  .modal-bg.show{display:flex}
+  .modal{background:var(--palco2);border:1px solid var(--ciano);border-radius:14px;padding:20px;max-width:420px;text-align:center}
+  .modal p{margin-bottom:14px}
+  .modal button{background:var(--ciano);color:#1a0826;border:none;border-radius:8px;padding:9px 16px;font-weight:bold}
+  .rodape{text-align:center;color:var(--cinza);font-size:.8rem;margin-top:24px}
+  .bloco.c13 .bloco-cab .num{background:var(--ciano);color:#1a0826}
+  .bloco.c14 .bloco-cab .num, .bloco.c15 .bloco-cab .num{background:var(--magenta);color:#3a1500}
+  .bloco.c19 .bloco-cab .num, .bloco.c20 .bloco-cab .num{background:var(--verde);color:#04231a}
+  .bloco.c14 .texto .destaque, .bloco.c15 .texto .destaque{color:var(--magenta)}
+  .bloco.c19 .texto .destaque, .bloco.c20 .texto .destaque{color:var(--verde)}
+  .selo-foco{display:inline-block;background:#3a2e06;color:var(--ambar);border:1px solid var(--ambar);border-radius:10px;padding:0 7px;font-size:.66rem;letter-spacing:.5px;text-transform:none;margin-left:4px}
+  .bloco-cab .num{width:auto!important;min-width:34px;padding:0 7px;font-size:.9rem}
+  .bloco.c14 .bloco-cab .num{background:var(--ciano);color:#1a0826}
+  .bloco.c14 .texto .destaque{color:var(--ciano)}
+  .bloco.c15 .bloco-cab .num{background:var(--magenta);color:#2a1200}
+  .bloco.c15 .texto .destaque{color:#f0a868}
+  .card.c15 b{color:#f0a868}
+</style>
+</head>
+<body>
+<header>
+  <div class="selo">Todos os Caminhos · História 6º ano · CCF</div>
+  <h1>📖 Leitura Guiada</h1>
+  <p>Roma Antiga · Caps. 14, 15 e 19 · Prova 03/11 · Callis História 6 – Livro 2</p>
+</header>
+
+<div class="wrap">
+  <nav class="barra-nav" id="nav">
+    <a class="on" href="leitura-guiada.html">📖 Leitura Guiada</a>
+    <a href="quiz.html" data-etapa="quiz">🎯 Quiz</a>
+    <a href="resumo.html" data-etapa="resumo">🗺️ Resumo</a>
+    <a href="simulado.html" data-etapa="simulado">📝 Simulado</a>
+    <a href="index.html">🏠 Início</a>
+  </nav>
+
+  <div class="intro">
+    <h2>🛣️ Como funciona a estrada</h2>
+    <p>Os romanos diziam que <b>“todos os caminhos levam a Roma”</b> (o seu livro cita essa frase na p. 43). Agora é você quem percorre uma estrada romana à noite, de marco em marco de pedra. São <b>13 marcos</b>, numerados em algarismos romanos: os <b>Marcos I a V</b> são do Capítulo 14 (origens e República), os <b>Marcos VI a XI</b> do Capítulo 15 (Império) e os <b>Marcos XII e XIII</b> do Capítulo 19 (o legado romano).</p>
+    <ol>
+      <li>Leia o marco com calma. Tudo aqui vem do seu livro, e as páginas estão no topo de cada marco.</li>
+      <li>Responda as 3 perguntas <b>escrevendo com as suas palavras</b>. Não vale copiar do texto.</li>
+      <li>Clique em <b>Conferir</b>: aparecem a resposta-modelo e uma autoavaliação Sim/Não.</li>
+      <li>Com os 13 marcos conferidos e a autoavaliação respondida, o <b>🎯 Quiz destrava</b>.</li>
+    </ol>
+  </div>
+
+  <div class="painel">
+    <span id="salvo">💾 Progresso salvo automaticamente.</span>
+    <div class="btns">
+      <button class="mini" onclick="exportar()">📥 Exportar</button>
+      <button class="mini" onclick="document.getElementById('imp').click()">📤 Importar</button>
+      <input type="file" id="imp" accept="application/json" style="display:none" onchange="importar(event)">
+      <button class="mini" onclick="pedirZerar()">🗑️ Zerar tudo</button>
+    </div>
+  </div>
+
+  <div id="blocos"></div>
+
+  <div class="peg">
+    <h3>⚠️ 12 Pegadinhas da Prova (não caia nelas!)</h3>
+    <ol>
+      <li><b>Lenda ≠ história.</b> Rômulo e Remo são a LENDA. A pesquisa (Arqueologia) mostra aldeias latinas que se uniram no século VIII a.C., perto do rio Tibre.</li>
+      <li><b>Monte Aventino</b> é o lugar da fundação, perto do <b>rio Tibre</b>. Não confunda com o Monte Olimpo dos deuses gregos.</li>
+      <li><b>O Senado já existia na Monarquia</b> (ajudava o rei e escolhia o sucessor). E foi o Senado patrício, não a plebe, que expulsou os reis etruscos.</li>
+      <li><b>República = “coisa pública” só no nome:</b> os plebeus continuavam fora das decisões; o Senado era só de patrícios.</li>
+      <li><b>Censor conta cidadãos; questor cuida do dinheiro; edil cuida do policiamento e abastecimento; pretor cuida da justiça.</b> O ditador só existia em crise, por 6 meses.</li>
+      <li><b>Doze Tábuas ≠ Canuleia.</b> Doze Tábuas (450 a.C.) = leis ESCRITAS. Canuleia (445 a.C.) = CASAMENTO entre patrícios e plebeus.</li>
+      <li><b>As conquistas da plebe NÃO acabaram com a desigualdade.</b> A disputa pela terra continuou.</li>
+      <li><b>As grandes conquistas foram na REPÚBLICA</b>, comandadas pelo Senado, e não no Império.</li>
+      <li><b>1º Triunvirato:</b> Pompeu, Crasso e César. <b>2º:</b> Marco Antônio, Lépido e Otávio. Não troque!</li>
+      <li><b>Augusto NÃO fechou o Senado:</b> manteve as instituições, mas sem o poder de antes. E a sucessão era por <b>adoção</b>, não por herança.</li>
+      <li><b>Pax romana não foi paz total:</b> foi uma “paz armada”, com o exército controlando revoltas nas províncias.</li>
+      <li><b>Latim CLÁSSICO = escrita e elite; latim VULGAR = dia a dia.</b> E <b>313</b> = Edito de Milão (Constantino); <b>380</b> = Edito de Tessalônica (Teodósio), religião oficial.</li>
+    </ol>
+  </div>
+
+  <div class="cobertura">
+    <h3>🧭 Cobertura: Tópico → Marco</h3>
+    <table>
+      <thead><tr><th>Tópico da prova</th><th>Páginas (Callis História 6 – L2)</th><th>Marco</th></tr></thead>
+      <tbody>
+        <tr><td>Cap. 14: lenda de Rômulo e Remo, origens históricas, italiotas, três períodos</td><td>6, 8–10</td><td>I</td></tr>
+        <tr><td>Cap. 14: Monarquia, Senado, grupos sociais, reis etruscos</td><td>11–12</td><td>II</td></tr>
+        <tr><td>Cap. 14: República (res publica), Senado, magistraturas, Assembleia das Centúrias</td><td>12, 15–16</td><td>III</td></tr>
+        <tr><td>Cap. 14: plebeus × patrícios, tribuno, Doze Tábuas, Canuleia, fim da escravidão por dívida</td><td>12–14</td><td>IV</td></tr>
+        <tr><td>Cap. 14: expansão, Guerras Púnicas, Mare Nostrum</td><td>16–20</td><td>V</td></tr>
+        <tr><td>Cap. 15: crise da República, latifúndios, êxodo rural, irmãos Graco</td><td>28–30</td><td>VI</td></tr>
+        <tr><td>Cap. 15: generais, triunviratos, Júlio César</td><td>30–31</td><td>VII</td></tr>
+        <tr><td>Cap. 15: Otávio Augusto, nascimento do Império, sucessão</td><td>28, 31–32</td><td>VIII</td></tr>
+        <tr><td>Cap. 15: economia, estradas, fórum, arquitetura, termas, aquedutos</td><td>32–35</td><td>IX</td></tr>
+        <tr><td>Cap. 15: pão e circo, família, mulheres, vestais, religião e deuses</td><td>36–38</td><td>X</td></tr>
+        <tr><td>Cap. 15: pax romana, romanização, fontes históricas</td><td>39–41, 48</td><td>XI</td></tr>
+        <tr><td>Cap. 19: latim (vulgar × clássico, línguas românicas) e Direito romano</td><td>88, 90–91</td><td>XII</td></tr>
+        <tr><td>Cap. 19: religião romana, cristianismo e paganismo</td><td>91–92 (e 37)</td><td>XIII</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="revisar" id="revisar" style="display:none">
+    <h3>🔁 Para revisar antes da prova</h3>
+    <ul id="revisar-lista"></ul>
+  </div>
+
+  <div class="relatorio">
+    <h3>📊 Para os pais (resumo desta leitura)</h3>
+    <div id="rel-conteudo">Conforme os marcos forem sendo conferidos, o resumo aparece aqui.</div>
+  </div>
+
+  <div class="trilha-fim" id="trilha-fim">
+    <h3>🔒 Próxima etapa: Quiz</h3>
+    <p id="trilha-fim-txt">O Quiz destrava quando os 13 marcos estiverem conferidos e a autoavaliação respondida.</p>
+    <a class="btn off" id="btn-prox" href="quiz.html">🎯 Ir para o Quiz</a>
+  </div>
+
+  <div class="rodape">Feito com carinho para o jovem aprendiz. 🛣️ Boa estrada e boa prova!</div>
+</div>
+
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <p id="modal-txt"></p>
+    <button onclick="fecharModal()" id="modal-ok">Ok</button>
+    <button class="mini" onclick="fecharModal()" id="modal-cancel" style="display:none;margin-left:8px">Cancelar</button>
+  </div>
+</div>
+
+<script>
+/* ====== TRILHA COM CADEADOS (módulo comum do kit) ====== */
+var KIT='caminhos_hist6';
+var TRILHA=[
+ {id:'leitura', chave:KIT+'_leitura_v1', nome:'Leitura Guiada', arquivo:'leitura-guiada.html', emoji:'📖'},
+ {id:'quiz', chave:KIT+'_quiz_v1', nome:'Quiz', arquivo:'quiz.html', emoji:'🎯'},
+ {id:'resumo', chave:KIT+'_resumo_v1', nome:'Resumo', arquivo:'resumo.html', emoji:'🗺️'},
+ {id:'simulado', chave:KIT+'_simulado_v1', nome:'Simulado', arquivo:'simulado.html', emoji:'📝'}
+];
+function lerJSON(k){ try{ var s=localStorage.getItem(k); return s?JSON.parse(s):null; }catch(e){ return null; } }
+function trilhaLiberada(){ var t=lerJSON(KIT+'_trilha_v1'); return !!(t&&t.liberadoPelosPais); }
+function etapaConcluida(id){ var e=TRILHA.filter(function(t){return t.id===id;})[0]; var d=lerJSON(e.chave); return !!(d&&d.concluido); }
+function podeAbrir(id){ var idx=TRILHA.map(function(t){return t.id;}).indexOf(id); if(idx<=0||trilhaLiberada()) return true; return etapaConcluida(TRILHA[idx-1].id); }
+function marcarNav(){
+  var links=document.querySelectorAll('#nav a[data-etapa]');
+  for(var i=0;i<links.length;i++){ var id=links[i].getAttribute('data-etapa'); if(!podeAbrir(id)){ links[i].classList.add('lock'); links[i].textContent='🔒 '+links[i].textContent.replace('🔒 ',''); links[i].setAttribute('title','Ainda trancado'); } else { links[i].classList.remove('lock'); links[i].textContent=links[i].textContent.replace('🔒 ',''); } }
+}
+
+/* ====== MARCOS DA ESTRADA (conteúdo do livro Callis História 6 – Livro 2: caps. 14, 15 e 19) ====== */
+var ROM=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII'];
+var BLOCOS = [
+ {
+  porto:"Marco I · Capítulo 14 · pp. 6, 9 e 10", emoji:"🐺", u:"c14",
+  titulo:"Roma: a lenda e a história",
+  texto:[
+   "A estrada começa na própria cidade. Segundo a <span class='destaque'>lenda</span>, Roma foi fundada pelos gêmeos <b>Rômulo e Remo</b>, filhos do deus <b>Marte</b> e de Reia Sílvia. Jogados no <b>rio Tibre</b> ainda bebês, eles foram <b>amamentados por uma loba</b> e criados por camponeses. Adultos, fundaram a cidade no <b>Monte Aventino</b>. Numa disputa, Rômulo matou Remo e virou o <b>primeiro rei</b>.",
+   "Essa lenda <b>engrandecia o passado</b> dos romanos e era usada para justificar a importância e o poder de Roma. Hoje não há dados concretos sobre a fundação: quem investiga as origens da cidade é a <span class='destaque'>Arqueologia</span>, que estuda os vestígios deixados pelos povos antigos.",
+   "O que se sabe: a região da <span class='destaque'>península Itálica</span> era povoada desde o Paleolítico e recebeu povos indo-europeus por volta de 2000 a.C. Os principais povoadores foram os <b>sabinos, úmbrios, samnitas e latinos</b>, chamados de <span class='destaque'>italiotas</span>. Também viviam ali <b>etruscos</b>, celtas, cartagineses e <b>gregos</b> (no sul e na Sicília, a <b>Magna Grécia</b>, que influenciou muito a cultura romana).",
+   "Os especialistas acreditam que Roma nasceu no <b>século VIII a.C.</b>, no Monte Aventino, um lugar estratégico por estar perto do rio Tibre. Ameaçadas por outros povos, <b>aldeias latinas se uniram</b> numa fortificação militar, que depois virou cidade.",
+   "<div class='olhar'><b>Os três períodos de Roma (p. 10):</b> <b>Monarquia</b> (753 a 509 a.C.) → <b>República</b> (509 a 27 a.C.) → <b>Império</b> (27 a.C. a 476 d.C.).</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Qual é a diferença entre a lenda de Rômulo e Remo e o que os historiadores e arqueólogos dizem sobre a origem de Roma?",modelo:"A lenda conta que dois gêmeos, filhos do deus Marte, foram salvos por uma loba e fundaram Roma. Os pesquisadores dizem que não há dados concretos sobre a fundação: a Arqueologia mostra que aldeias latinas se uniram no século VIII a.C., perto do rio Tibre, para se proteger, e isso virou a cidade.",chk:["Disse que a lenda tem deuses/loba e não é prova?","Expliquei a versão da pesquisa (aldeias latinas unidas, Arqueologia)?"]},
+   {tag:"apl",q:"Um primo seu leu a lenda e disse: 'então Roma foi mesmo fundada por filhos de um deus'. Explique para ele, com as suas palavras, para que servia essa história para os romanos.",modelo:"A lenda não é prova de como Roma nasceu. Ela servia para engrandecer o passado dos romanos: ligar a cidade a um deus da guerra e à força da loba fazia o povo se orgulhar e justificava o poder de Roma.",chk:["Falei que a lenda não é um fato comprovado?","Expliquei que ela servia para dar orgulho/justificar o poder de Roma?"]},
+   {tag:"apl",q:"Coloque em ordem os três períodos da história de Roma e diga em que ano cada um começou.",modelo:"1º Monarquia, que começa em 753 a.C.; 2º República, que começa em 509 a.C.; 3º Império, que começa em 27 a.C. e vai até 476 d.C.",chk:["Coloquei na ordem Monarquia → República → Império?","Acertei pelo menos duas datas (753 a.C., 509 a.C., 27 a.C.)?"]}
+  ]
+ },
+ {
+  porto:"Marco II · Capítulo 14 · pp. 11 e 12", emoji:"👑", u:"c14",
+  titulo:"A Monarquia e a sociedade romana",
+  texto:[
+   "A primeira forma de governo de Roma foi a <span class='destaque'>monarquia</span> (governo de um só). A cidade nasceu de comunidades familiares chamadas <b>gens</b>, parecidas com os genos gregos. Os donos de terras dessas comunidades eram os <span class='destaque'>patrícios</span>, que viraram a <b>elite</b> de Roma.",
+   "O <b>rei</b> era escolhido entre os patrícios, mas não governava sozinho: havia o <span class='destaque'>Senado</span>, um <b>conselho de anciãos</b> formado pelos chefes das famílias patrícias. O Senado ajudava o rei a decidir e <b>escolhia o sucessor</b> quando o rei morria.",
+   "<ul><li><b>Patrícios:</b> descendentes das famílias donas de terras; participavam das decisões políticas.</li><li><b>Clientes:</b> viviam numa relação de <b>favores</b> com os patrícios — prestavam serviços em troca de benefícios.</li><li><b>Plebeus:</b> comerciantes, artesãos, pequenos proprietários. Eram a <b>maioria</b>, mas <b>não participavam do governo</b>.</li><li><b>Escravos:</b> principalmente pessoas que não conseguiam pagar <b>dívidas</b> (escravos por dívida) ou <b>prisioneiros de guerra</b>. Na monarquia ainda eram poucos.</li></ul>",
+   "Por volta de <b>600 a.C.</b>, os <span class='destaque'>etruscos</span> — povo do norte, militarizado e com técnicas de construção avançadas — tomaram Roma e passaram a ter <b>reis etruscos</b>. A cidade prosperou e se modernizou, mas os patrícios perderam influência. Então o <b>Senado deu um golpe</b>, expulsou os etruscos e criou um novo governo.",
+   "<div class='olhar'><b>Olhar de prova:</b> o Senado já existia na Monarquia, ajudando o rei. E quem expulsou os reis etruscos foram os <b>patrícios do Senado</b>, não os plebeus.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Qual era o papel do Senado durante a Monarquia romana?",modelo:"O Senado era um conselho dos homens mais velhos, chefes das famílias patrícias. Ele ajudava o rei a tomar decisões e escolhia o próximo rei quando o rei morria.",chk:["Disse que era formado por patrícios mais velhos/chefes de família?","Citei ajudar o rei e escolher o sucessor?"]},
+   {tag:"apl",q:"Leia as descrições e diga a que grupo social cada pessoa pertence: (a) um artesão que vende vasos no mercado e não pode votar nas decisões; (b) um homem que presta serviços a uma família rica em troca de proteção; (c) um homem que perdeu a liberdade porque não pagou o que devia.",modelo:"(a) plebeu; (b) cliente; (c) escravo por dívida.",chk:["Acertei o plebeu e o cliente?","Acertei o escravo por dívida?"]},
+   {tag:"apl",q:"Por que os patrícios ficaram contra os reis etruscos, mesmo com Roma prosperando? Explique como se fosse para um amigo.",modelo:"Porque, com os reis etruscos no poder, a elite patrícia perdeu a sua força política. Mesmo com a cidade crescendo, eles queriam o poder de volta, então o Senado tirou os etruscos e criou outro governo.",chk:["Falei que os patrícios perderam influência/poder?","Disse que o Senado expulsou os etruscos?"]}
+  ]
+ },
+ {
+  porto:"Marco III · Capítulo 14 · pp. 12, 15 e 16", emoji:"🏛️", u:"c14",
+  titulo:"Nasce a República: a “coisa pública”",
+  texto:[
+   "Depois da expulsão dos etruscos, nasceu a <span class='destaque'>República</span>. A palavra vem do latim <b><i>res publica</i></b>, “<b>coisa pública</b>”: um governo que estaria voltado para o bem de todos, ao contrário da monarquia, vista como governo de uma pessoa só.",
+   "Mas, na prática, os <b>plebeus continuavam proibidos</b> de participar das decisões, porque o órgão mais poderoso era o <span class='destaque'>Senado</span>, formado só por patrícios. O Senado zelava pelas tradições, <b>fiscalizava as contas públicas</b>, cuidava da <b>política externa</b> e decidia sobre <b>guerra ou paz</b>. Curiosidade: para votar, os senadores saíam pela <b>esquerda</b> (sim) ou pela <b>direita</b> (não).",
+   "Os cargos da República eram as <span class='destaque'>magistraturas</span>, ocupadas por eleição: <ul><li><b>Cônsules</b> (2 eleitos): autoridade executiva máxima; administravam Roma.</li><li><b>Pretores:</b> justiça.</li><li><b>Censores:</b> contavam os cidadãos e os dividiam pela riqueza.</li><li><b>Questores:</b> impostos e tesouro.</li><li><b>Edis:</b> policiamento e abastecimento.</li><li><b>Ditador:</b> indicado pelo Senado só em crise, por <b>6 meses</b>, com poderes ilimitados.</li><li><b>Tribunos da plebe:</b> plebeus que podiam <b>vetar</b> leis que prejudicassem a sua classe.</li></ul>",
+   "A principal assembleia era a <b>Assembleia das Centúrias</b> (Centuriata), controlada pelos patrícios. As centúrias (100 homens) eram grupos do exército divididos pela <b>renda</b>: o exército não era permanente e cada cidadão se armava como podia. Quem não tinha dinheiro para se armar <b>não participava</b> da assembleia."
+  ],
+  perguntas:[
+   {tag:"conc",q:"O que quer dizer “república” e por que, na prática, a República Romana não era um governo de todos?",modelo:"República vem de res publica, “coisa pública”, um governo para o bem de todos. Mas na prática os plebeus, que eram a maioria, não decidiam: quem mandava era o Senado, só de patrícios, e a assembleia era controlada pelos patrícios e dividida pela renda.",chk:["Expliquei o significado (coisa pública)?","Disse que os plebeus ficavam de fora e o poder era dos patrícios/Senado?"]},
+   {tag:"apl",q:"Diga qual magistrado cuidaria de cada situação: (a) contar quantos cidadãos há em Roma; (b) cobrar os impostos; (c) uma crise militar muito grave; (d) uma lei que prejudica os plebeus.",modelo:"(a) censor; (b) questor; (c) ditador, indicado pelo Senado por 6 meses; (d) o tribuno da plebe, que pode vetar a lei.",chk:["Acertei censor e questor?","Acertei ditador e tribuno da plebe?"]},
+   {tag:"apl",q:"Um plebeu pobre de Roma não tinha dinheiro para comprar armas. Explique o que isso tinha a ver com a política.",modelo:"Na Assembleia das Centúrias só participava quem fazia parte do exército, e cada um tinha que se armar com o próprio dinheiro. Sem armas, ele ficava fora do exército e, por isso, também ficava fora da assembleia e das decisões.",chk:["Liguei armas/exército à participação na assembleia?","Disse que a divisão era pela renda (os pobres ficavam de fora)?"]}
+  ]
+ },
+ {
+  porto:"Marco IV · Capítulo 14 · pp. 12 a 14", emoji:"⚖️", u:"c14",
+  titulo:"Plebeus × patrícios: a luta por direitos",
+  texto:[
+   "Na República, os plebeus estavam cada vez mais <b>pobres</b>: faltava trabalho na cidade, as terras do campo eram dos patrícios (herdadas pela <b>condição de nascimento</b>) e o <b>casamento entre patrícios e plebeus era proibido</b> — não havia como subir socialmente.",
+   "Além disso, os patrícios obrigavam os plebeus a <b>servir no exército</b>. Longe do trabalho, eles voltavam sem dinheiro, faziam <b>dívidas</b> e, sem conseguir pagar, viravam <b>escravos</b>. E ainda pagavam <b>impostos</b>.",
+   "Cansados, os plebeus <b>abandonaram a cidade</b> e se <b>recusaram a servir no exército</b>. Sem trabalhadores e soldados, os patrícios foram obrigados a ceder direitos, pouco a pouco:",
+   "<ul><li><b>c. 494 a.C. — Tribuno da plebe:</b> representante eleito pelos plebeus, que podia <b>vetar</b> leis do Senado.</li><li><b>450 a.C. — Lei das Doze Tábuas:</b> leis <b>escritas</b> que todos podiam consultar (ainda favoreciam os patrícios).</li><li><b>445 a.C. — Lei Canuleia:</b> permitiu o <b>casamento</b> entre patrícios e plebeus.</li><li><b>366 a.C. — Fim da escravidão por dívida.</b></li></ul>",
+   "A <span class='destaque'>Lei das Doze Tábuas</span> foi o <b>primeiro conjunto de leis escritas</b> de Roma. Antes, as leis eram <b>orais</b> e cada líder interpretava do seu jeito, o que gerava injustiças contra os pobres. Ela foi escrita em <b>12 placas de bronze</b>, expostas no <b>Fórum</b>, e tratava de propriedade, família, dívidas e punições.",
+   "<div class='olhar'><b>Olhar de prova:</b> as conquistas foram importantes, mas <b>não acabaram com a desigualdade</b>. A disputa pela <b>terra</b> continuou, e as vitórias beneficiaram principalmente os <b>plebeus mais ricos</b>.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Que estratégia os plebeus usaram para pressionar os patrícios, e por que ela funcionou?",modelo:"Eles saíram da cidade e se recusaram a ser soldados. Funcionou porque os patrícios dependiam deles para trabalhar e para formar o exército; com medo de ficar sem trabalhadores e soldados, cederam direitos.",chk:["Citei sair da cidade e/ou recusar o exército?","Expliquei que os patrícios dependiam dos plebeus?"]},
+   {tag:"apl",q:"Associe cada problema dos plebeus à conquista que o resolveu: (a) um plebeu não podia casar com uma patrícia; (b) um plebeu endividado virou escravo; (c) as leis eram faladas e cada juiz entendia de um jeito.",modelo:"(a) Lei Canuleia (445 a.C.); (b) fim da escravidão por dívida (366 a.C.); (c) Lei das Doze Tábuas (450 a.C.), com leis escritas para todos consultarem.",chk:["Acertei a Lei Canuleia e o fim da escravidão por dívida?","Liguei as leis faladas à Lei das Doze Tábuas?"]},
+   {tag:"apl",q:"Imagine que a sua escola não tivesse regras escritas e cada professor decidisse do seu jeito. Use esse exemplo para explicar por que a Lei das Doze Tábuas foi importante para os plebeus.",modelo:"Sem regras escritas, cada um aplicaria as regras como quisesse e quem tem menos poder sairia prejudicado. Com as leis escritas e expostas no Fórum, todos podiam saber as regras, e ficava mais difícil os patrícios inventarem interpretações contra os plebeus.",chk:["Usei a comparação com a escola?","Disse que leis escritas e públicas protegem contra injustiças?"]}
+  ]
+ },
+ {
+  porto:"Marco V · Capítulo 14 · pp. 16 a 20", emoji:"⚔️", u:"c14",
+  titulo:"A expansão: península Itálica, Guerras Púnicas e Mare Nostrum",
+  texto:[
+   "As grandes conquistas romanas aconteceram na <b>República</b>, sob o comando do Senado — e não no Império. Primeiro, Roma levou <b>mais de 200 anos</b> para dominar a <span class='destaque'>península Itálica</span>. No começo a expansão era <b>defensiva</b> (em 387 a.C. os <b>gauleses</b> saquearam a cidade). Com o exército mais forte, virou <b>ofensiva</b>: conquistar terras, riquezas e escravos. Os <b>generais</b> passaram a ter cada vez mais influência na política.",
+   "No século III a.C., o comércio do Mediterrâneo ocidental era dominado por <span class='destaque'>Cartago</span>, antiga colônia fenícia (tecidos, perfumes, ouro, marfim, trigo). Roma e Cartago se enfrentaram nas <span class='destaque'>Guerras Púnicas</span> — os romanos chamavam os fenícios de <b>púnicos</b>. Foram <b>3 guerras</b>, em quase <b>120 anos</b>:",
+   "<ul><li><b>1ª (264–241 a.C.):</b> Roma vence e conquista <b>Sicília, Sardenha e Córsega</b>.</li><li><b>2ª (218–202 a.C.):</b> a mais famosa. O general cartaginês <b>Aníbal</b> invadiu a península com cerca de 50 mil soldados e até <b>elefantes</b>. Roma sofreu derrotas, mas venceu; Cartago perdeu a região da atual <b>Espanha</b>.</li><li><b>3ª (150–146 a.C.):</b> Roma <b>destruiu Cartago</b> e, segundo o livro, jogou <b>sal</b> na terra como símbolo de que nada voltaria a crescer ali.</li></ul>",
+   "Depois de vencer Cartago, Roma dominou todo o Mediterrâneo e passou a chamá-lo de <span class='destaque'>Mare Nostrum</span> (“<b>nosso mar</b>”). Assim controlou o <b>comércio</b> da região e aumentou o número de <b>escravos</b> com os prisioneiros de guerra."
+  ],
+  perguntas:[
+   {tag:"conc",q:"Qual era o principal motivo da rivalidade entre Roma e Cartago?",modelo:"A disputa pelo domínio do mar Mediterrâneo e do seu comércio, que era muito lucrativo e estava nas mãos de Cartago.",chk:["Falei do controle do Mediterrâneo?","Citei o comércio/as riquezas?"]},
+   {tag:"apl",q:"Um colega escreveu: 'Roma conquistou quase todo o seu território na época do Império, comandada pelo imperador'. Corrija a frase.",modelo:"Está errado: as grandes conquistas aconteceram na República, comandadas pelo Senado. No Império a expansão diminuiu bastante.",chk:["Disse que foi na República?","Citei o Senado no comando?"]},
+   {tag:"apl",q:"Explique, com as suas palavras, por que o nome Mare Nostrum mostra o poder de Roma depois das Guerras Púnicas.",modelo:"“Nosso mar” quer dizer que o Mediterrâneo passou a ser praticamente de Roma: depois de vencer Cartago, os romanos dominavam todo o mar, o comércio e as terras em volta.",chk:["Traduzi como “nosso mar”?","Liguei o nome à vitória sobre Cartago e ao controle do comércio?"]}
+  ]
+ },
+ {
+  porto:"Marco VI · Capítulo 15 · pp. 28 a 30", emoji:"🌾", u:"c15",
+  titulo:"A crise da República: terras, êxodo rural e os irmãos Graco",
+  texto:[
+   "As conquistas trouxeram riqueza, mas também crise. As terras dos povos dominados foram <b>arrendadas</b> (alugadas) para a elite, que também se apossou de terras públicas e criou <span class='destaque'>latifúndios</span>: <b>grandes propriedades</b> que usavam <b>mão de obra escravizada</b>.",
+   "Os latifúndios produziam muito e baixavam os preços. Os <b>pequenos produtores</b> não conseguiam concorrer, tinham prejuízo e <b>abandonavam o campo</b> rumo às cidades: o <span class='destaque'>êxodo rural</span>. A plebe urbana cresceu e muita gente vivia na pobreza. Além disso, muitos soldados morreram nas guerras (como as Púnicas), o que diminuiu o exército e a mão de obra.",
+   "O tribuno da plebe <span class='destaque'>Tibério Graco</span> propôs uma <b>reforma agrária</b>: uma lei que <b>limitava a quantidade de terras</b> de cada pessoa, para redistribuí-las. Os senadores viram isso como ameaça aos seus privilégios. Em <b>133 a.C.</b>, Tibério foi <b>assassinado</b> com cerca de 500 apoiadores.",
+   "Em <b>123 a.C.</b>, o irmão dele, <span class='destaque'>Caio Graco</span>, também tribuno, aprovou leis que aumentaram a participação dos plebeus e <b>baixaram o preço dos alimentos</b> para os pobres. Ele também foi morto. Os conflitos envolveram generais e seus exércitos e viraram <b>guerras civis</b>.",
+   "<div class='olhar'><b>Olhar de prova:</b> <b>reforma agrária</b> = redistribuir terras para promover justiça social. Os Graco eram <b>tribunos da plebe</b>, não senadores nem generais.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"O que eram os latifúndios e que tipo de trabalho era usado neles?",modelo:"Eram grandes propriedades rurais nas mãos da elite romana, que trabalhavam com mão de obra escravizada.",chk:["Disse que eram grandes propriedades da elite?","Citei o trabalho escravo?"]},
+   {tag:"apl",q:"Conte a história de um pequeno agricultor romano imaginário, em 3 ou 4 frases, mostrando como os latifúndios o levaram ao êxodo rural.",modelo:"Exemplo: um agricultor plantava trigo num sítio pequeno. Perto dele surgiu um latifúndio com muitos escravos, que vendia trigo bem mais barato. Ele não conseguiu vender a sua colheita e teve prejuízo. Sem saída, deixou o campo e foi morar na cidade, onde vivia com dificuldade.",chk:["Mostrei o latifúndio vendendo mais barato (concorrência)?","Terminei com a mudança do campo para a cidade?"]},
+   {tag:"apl",q:"Se você fosse um senador dono de muitas terras, por que seria contra a proposta de Tibério Graco? E se fosse um camponês pobre, por que seria a favor?",modelo:"Como senador rico, eu seria contra porque a lei limitaria a quantidade de terras que eu poderia ter e eu perderia riqueza e privilégios. Como camponês pobre, eu seria a favor porque a reforma agrária redistribuiria terras e eu poderia voltar a ter onde plantar.",chk:["Expliquei o lado do senador (perder terras/privilégios)?","Expliquei o lado do camponês (ganhar terra/justiça social)?"]}
+  ]
+ },
+ {
+  porto:"Marco VII · Capítulo 15 · pp. 30 e 31", emoji:"🗡️", u:"c15",
+  titulo:"Generais no poder: triunviratos e Júlio César",
+  texto:[
+   "Com o caos das guerras civis, o exército ficou cada vez mais forte. Os generais, chamados de <span class='destaque'>imperatores</span>, começaram a querer o poder político e usavam a <b>fidelidade dos soldados</b> para pressionar o Senado.",
+   "Em <b>60 a.C.</b>, três generais — <b>Pompeu, Crasso e Júlio César</b> — tomaram o poder e formaram o <span class='destaque'>Primeiro Triunvirato</span> (“trium” = três; “vir” = homem: governo de três homens). Eles dividiram o território e conquistaram regiões na Gália, na Hispânia e no Oriente.",
+   "<span class='destaque'>Júlio César</span> ganhou enorme prestígio nas <b>Guerras Gálicas</b> (58–50 a.C.), quando expandiu os domínios para o norte. Com a morte de Crasso, disputou o poder com Pompeu. Em <b>49 a.C.</b> atravessou o <b>Rubicão</b> (um riacho que marcava o limite da sua província), entrou em Roma com o exército e virou <b>ditador vitalício</b>. Fez reformas, incluindo o <b>calendário juliano</b>, e ganhou muitos inimigos.",
+   "Em <b>15 de março de 44 a.C.</b>, César foi <b>assassinado</b>. Então formou-se o <span class='destaque'>Segundo Triunvirato</span>: <b>Marco Antônio, Lépido e Caio Otávio</b> (sobrinho e filho adotivo de César).",
+   "<div class='olhar'><b>Palavra do livro:</b> “soldado” vem de <b>soldo</b>, nome de uma moeda de ouro romana.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"O que foi um triunvirato? Cite os membros do Primeiro e do Segundo.",modelo:"Triunvirato era um governo de três homens. O Primeiro foi de Pompeu, Crasso e Júlio César (60 a.C.); o Segundo, de Marco Antônio, Lépido e Caio Otávio.",chk:["Expliquei que é governo de três?","Citei corretamente os membros dos dois?"]},
+   {tag:"apl",q:"Explique, com um exemplo da vida real, por que a fidelidade dos soldados deixou os generais tão poderosos na crise da República.",modelo:"Quem tem muita gente armada do seu lado pode ameaçar quem toma as decisões. É como um líder que tem um grupo grande que obedece só a ele: os outros ficam com medo de contrariá-lo. Os generais usavam seus exércitos fiéis para intimidar o Senado e conseguir poder.",chk:["Dei um exemplo/comparação meu?","Disse que os generais usavam os soldados para pressionar o Senado?"]},
+   {tag:"apl",q:"Coloque em ordem: (a) César vira ditador vitalício; (b) Segundo Triunvirato; (c) Primeiro Triunvirato; (d) César é assassinado. Explique a ligação entre dois desses fatos.",modelo:"Ordem: c (Primeiro Triunvirato, 60 a.C.) → a (César ditador, 49 a.C.) → d (assassinato, 44 a.C.) → b (Segundo Triunvirato). Ligação: depois que César foi assassinado, o Senado promoveu o Segundo Triunvirato.",chk:["Acertei a ordem c → a → d → b?","Expliquei a ligação entre dois fatos?"]}
+  ]
+ },
+ {
+  porto:"Marco VIII · Capítulo 15 · pp. 28, 31 e 32", emoji:"🦅", u:"c15",
+  titulo:"Otávio Augusto e o nascimento do Império",
+  texto:[
+   "Na disputa do Segundo Triunvirato, <span class='destaque'>Caio Otávio</span> derrotou Lépido e Marco Antônio. Teve a vitória reconhecida pelo Senado em <b>31 a.C.</b> e, em <b>27 a.C.</b>, passou a usar o título de <span class='destaque'>Augusto</span> (do latim <i>augustus</i>: “sagrado”, “elevado” — uma exaltação ao soberano). Começava o <b>Império Romano</b>.",
+   "O Império tinha três bases: o <b>trabalho escravo</b>, os <b>tributos (impostos) das províncias</b> e o <b>poder centralizado no imperador</b>, que se apoiava no <b>exército</b>.",
+   "Otávio Augusto (governou de 30 a.C. a 14 d.C.) reorganizou o <b>exército e a marinha</b>, criou a <b>guarda pretoriana</b> (sua segurança pessoal), organizou a cobrança de impostos, fez reforma urbana, incentivou a agricultura e construiu <b>estradas e pontes</b>.",
+   "Atenção: ele <b>manteve</b> o Senado, as magistraturas e as assembleias da República, <b>mas sem o poder de antes</b>. Era o imperador quem nomeava os senadores, comandava o exército, criava leis e dirigia a religião.",
+   "<div class='olhar'><b>Olhar de prova:</b> a sucessão no Império <b>não era hereditária</b>. O imperador <b>indicava</b> o sucessor e o <b>adotava como filho</b> — mesmo que não fosse romano nem patrício — e o ensinava a governar.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Quais eram as três bases do Império Romano, segundo o livro?",modelo:"O trabalho escravo, os impostos pagos pelas províncias e o poder concentrado no imperador, apoiado no exército.",chk:["Citei trabalho escravo e impostos das províncias?","Citei o poder centralizado no imperador/exército?"]},
+   {tag:"apl",q:"Um colega disse: 'quando o Império começou, o Senado foi fechado'. Ele está certo? Explique.",modelo:"Não. Otávio Augusto manteve o Senado, as magistraturas e as assembleias, mas eles perderam poder: o imperador nomeava os senadores e concentrava as decisões.",chk:["Disse que o Senado foi mantido?","Expliquei que ele perdeu poder para o imperador?"]},
+   {tag:"apl",q:"Em muitos reinos, o filho do rei herda o trono. Compare isso com o jeito romano de escolher o próximo imperador.",modelo:"Nos reinos hereditários, o trono passa de pai para filho de sangue. Em Roma, o imperador escolhia quem ia sucedê-lo e adotava essa pessoa como filho, mesmo que não fosse romana ou patrícia, e ensinava a ela os negócios do governo.",chk:["Expliquei que em Roma era por indicação/adoção?","Comparei com a herança de pai para filho?"]}
+  ]
+ },
+ {
+  porto:"Marco IX · Capítulo 15 · pp. 32 a 35", emoji:"🏗️", u:"c15",
+  titulo:"Economia, estradas e a cidade modelo",
+  texto:[
+   "A riqueza de Roma vinha dos <b>impostos</b> cobrados das regiões conquistadas, do comércio de mercadorias das <b>províncias</b> (alimentos, metais preciosos) e do <b>trabalho escravo</b>. Escravizados trabalhavam na agricultura, em obras, oficinas, minas, pedreiras e até como músicos, professores e <b>gladiadores</b>.",
+   "Por isso a economia romana é chamada de <span class='destaque'>comercial</span> (dependia das trocas entre as províncias e o Império) e <span class='destaque'>monetária</span> (o comércio aumentou a circulação de <b>moedas</b>, cunhadas em homenagem aos imperadores). As <b>estradas</b> romanas somavam cerca de <b>80 mil km</b> — como duas voltas na Terra.",
+   "Roma era o <b>modelo</b> para as outras cidades. No centro ficava o <span class='destaque'>fórum</span>, grande praça onde se proclamavam ordens do imperador, desfilavam os generais vitoriosos e se discutiam negócios e política. Os romanos construíam templos, teatros, anfiteatros, palácios, tribunais, termas, aquedutos, pontes e estradas.",
+   "<ul><li><b>Do estilo grego</b>, mantiveram o <b>frontão</b> (topo em forma de triângulo) e a <b>colunata</b> (colunas em simetria) — como na Casa Branca (EUA) e na Igreja da Candelária (Rio de Janeiro). Também usavam o <b>mármore</b>.</li><li><b>Novidades romanas:</b> os <b>arcos</b> (erguidos para comemorar vitórias militares), as <b>abóbadas</b> (coberturas curvas entre arcos e muros, comuns em templos) e o <b>cimento</b>, muito durável.</li><li><b>Termas:</b> banhos públicos com saunas, piscinas, ginástica e bibliotecas, frequentados por todas as classes. <b>Aquedutos</b> levavam água a chafarizes, banheiros e casas.</li></ul>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Por que a economia romana é chamada de comercial e monetária?",modelo:"Comercial porque dependia das trocas de mercadorias entre as províncias e o Império. Monetária porque, com o crescimento do comércio, aumentou muito o uso de moedas, que tinham a homenagem aos imperadores.",chk:["Expliquei o “comercial” (trocas entre províncias e Império)?","Expliquei o “monetária” (circulação de moedas)?"]},
+   {tag:"apl",q:"Você está numa cidade imaginária e vê: (a) um portão enorme em forma de curva comemorando uma vitória; (b) uma fachada com um triângulo no topo apoiado em colunas; (c) uma ponte alta cheia de arcos levando água de longe. Diga o nome de cada elemento e se ele é herança grega ou criação romana.",modelo:"(a) arco — criação romana, para comemorar vitórias militares; (b) frontão com colunata — estilo grego que os romanos adotaram; (c) aqueduto — construção romana para transportar água.",chk:["Acertei arco e aqueduto como romanos?","Acertei frontão/colunata como estilo grego?"]},
+   {tag:"apl",q:"Escolha uma construção romana (termas, aqueduto ou estrada) e explique para que ela servia e o que existe parecido hoje na sua cidade.",modelo:"Exemplo: o aqueduto levava água de lugares distantes até chafarizes, banheiros e casas da cidade. Hoje, parecido, existem as adutoras e os canos da companhia de água, que levam água tratada até as casas.",chk:["Expliquei a função da construção escolhida?","Comparei com algo de hoje?"]}
+  ]
+ },
+ {
+  porto:"Marco X · Capítulo 15 · pp. 36 a 38", emoji:"🎭", u:"c15",
+  titulo:"Pão e circo, família e religião",
+  texto:[
+   "A população se divertia nos <b>teatros</b> (comédias, tragédias, mímicas), nos <b>circos</b> (corridas de <b>bigas e quadrigas</b>, carros puxados por cavalos) e nos <b>anfiteatros</b>, depois chamados de <b>coliseus</b>, onde <b>gladiadores</b> e animais lutavam. Tudo isso fazia parte da política do <span class='destaque'>pão e circo</span> (<i>panem et circenses</i>): distribuir <b>comida</b> e oferecer <b>espetáculos</b> para entreter e <b>manipular</b> o povo e ganhar apoio, principalmente em crises.",
+   "A família romana era <span class='destaque'>patriarcal</span>: o <b>pai de família</b> tinha poder sobre a esposa, os filhos (mesmo casados) e os escravizados. As <b>mulheres</b> podiam ir a banquetes, ter propriedades, estudar e participar de campanhas eleitorais, mas <b>não votavam nem podiam ser eleitas</b>, porque não eram consideradas cidadãs.",
+   "Exceção de prestígio: as <span class='destaque'>sacerdotisas vestais</span>, 6 mulheres escolhidas entre 6 e 10 anos que serviam por 30 anos e mantinham <b>sempre aceso o fogo sagrado</b> da deusa <b>Vesta</b> (protetora das lareiras).",
+   "A religião era <span class='destaque'>politeísta</span> (muitos deuses). Nas casas, cultuavam-se os <b>deuses familiares</b> (almas dos antepassados). Roma respeitava outras religiões, mas <b>obrigava os povos dominados a cultuar os deuses romanos</b>. Muitos deuses vieram dos gregos, com outros nomes: <b>Júpiter = Zeus</b> (senhor dos deuses), <b>Juno = Hera</b>, <b>Vênus = Afrodite</b> (amor), <b>Marte = Ares</b> (guerra), <b>Netuno = Poseidon</b> (mares), <b>Minerva = Atena</b> (sabedoria), <b>Mercúrio = Hermes</b> (comércio, mensageiro), <b>Baco = Dionísio</b> (vinho), <b>Diana = Ártemis</b> (caça), <b>Ceres = Deméter</b> (colheitas), <b>Plutão = Hades</b>, <b>Vulcano = Hefesto</b>. <b>Apolo</b> manteve o nome."
+  ],
+  perguntas:[
+   {tag:"conc",q:"O que era a política do pão e circo e para que os governantes a usavam?",modelo:"Era distribuir alimentos e oferecer espetáculos (corridas, lutas de gladiadores, teatro) ao povo. Servia para distrair e manipular a população e conseguir o apoio dela, principalmente nas épocas de crise.",chk:["Citei comida + espetáculos?","Disse que o objetivo era distrair/manipular/ganhar apoio?"]},
+   {tag:"apl",q:"Pense em algo de hoje que poderia ser comparado ao “pão e circo” (pode ser imaginário). Explique a comparação.",modelo:"Exemplo: um governante que, perto da eleição, faz shows gratuitos e distribui brindes para o povo ficar contente e não reparar nos problemas da cidade. É parecido com o pão e circo porque usa diversão e benefícios para ganhar apoio sem resolver as causas dos problemas.",chk:["Dei um exemplo meu?","Expliquei a semelhança (diversão/benefício para ganhar apoio)?"]},
+   {tag:"apl",q:"Uma estátua de museu mostra uma deusa grega do amor e da beleza. Que nome os romanos davam a ela? E qual seria o nome romano de Ares e de Hermes?",modelo:"A deusa grega do amor e da beleza é Afrodite, que os romanos chamavam de Vênus. Ares, deus da guerra, era Marte, e Hermes, deus do comércio e mensageiro, era Mercúrio.",chk:["Acertei Vênus?","Acertei Marte e Mercúrio?"]}
+  ]
+ },
+ {
+  porto:"Marco XI · Capítulo 15 · pp. 39 a 41 e 48", emoji:"🕊️", u:"c15",
+  titulo:"Pax romana e romanização",
+  texto:[
+   "Depois de muitos conflitos, Roma viveu a <span class='destaque'>pax romana</span> (“paz romana”), entre os séculos I e II d.C. (na Síntese do livro: <b>27 a.C. a 180 d.C.</b>). As guerras de expansão diminuíram, mas as conquistas não pararam: no governo de <b>Trajano</b> (98–117 d.C.) o Império chegou à sua <b>maior extensão</b>, cerca de 5 milhões de km².",
+   "Foi uma paz de verdade? <b>Não totalmente.</b> O Império continuava usando a <b>força militar</b> nas <span class='destaque'>províncias</span> (divisões administrativas do território) para <b>conter revoltas</b> e expulsar invasores. Por isso dizemos que foi uma espécie de <b>paz armada</b>.",
+   "Nas províncias foram fundadas cidades com estruturas iguais às de Roma: <b>fórum</b>, estradas, <b>aquedutos</b>. Instituições, arquitetura, arte e costumes romanos se espalharam: é a <span class='destaque'>romanização</span>. Os povos dominados podiam manter seus costumes, mas tinham de <b>respeitar o culto oficial romano</b>, <b>obedecer às leis</b> e <b>pagar impostos</b>. <b>Moedas com o rosto do imperador</b> circulavam por todo o Império, mostrando a sua autoridade.",
+   "Como sabemos tudo isso? Pelas <b>fontes históricas</b>: textos (copiados à mão por religiosos da Idade Média), objetos, pinturas, esculturas, edifícios, <b>moedas</b>, estradas, vasos de cerâmica e cidades inteiras, como <b>Pompeia</b>, soterrada pelo vulcão Vesúvio em 79 d.C.",
+   "<div class='olhar'><b>Texto complementar (p. 48):</b> a romanização nem sempre foi imposta “de cima”: muitas <b>elites das províncias</b> escolheram adotar o jeito romano (arquitetura, louças, vinho), porque a cultura de Roma era vista como desejável.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Por que podemos dizer que a pax romana foi uma “paz armada”?",modelo:"Porque, mesmo com o fim das grandes guerras de expansão, o Império continuava usando o exército nas províncias para impedir revoltas e expulsar invasores. A tranquilidade dependia da força militar.",chk:["Disse que o exército continuava agindo nas províncias?","Citei o controle de revoltas/invasores?"]},
+   {tag:"apl",q:"Imagine que você mora numa província conquistada por Roma. Cite três mudanças que você veria na sua cidade por causa da romanização.",modelo:"Exemplo: seria construído um fórum no centro da cidade; chegaria um aqueduto trazendo água; eu teria de pagar impostos ao imperador, obedecer às leis romanas, respeitar o culto romano e usaria moedas com o rosto do imperador.",chk:["Citei pelo menos uma construção (fórum, aqueduto, estrada)?","Citei pelo menos uma obrigação (impostos, leis, culto) ou as moedas?"]},
+   {tag:"apl",q:"Um arqueólogo achou um vaso de cerâmica e uma moeda romana. Explique o que cada um pode contar sobre a vida dos romanos.",modelo:"O vaso pode mostrar como viviam e comiam, o comércio de vinho e azeite que eram transportados nele e até cenas do dia a dia desenhadas. A moeda mostra o comércio e o poder do imperador, cujo rosto aparecia nela por todo o Império.",chk:["Expliquei o que o vaso revela?","Expliquei o que a moeda revela?"]}
+  ]
+ },
+ {
+  porto:"Marco XII · Capítulo 19 · pp. 88, 90 e 91", emoji:"📜", u:"c19",
+  titulo:"O legado: a língua latina e o Direito romano",
+  texto:[
+   "Muito da cultura romana chegou até hoje. O maior exemplo está na sua boca: o <b>português é um latim modificado</b>. Como os romanos dominaram a <b>Península Ibérica</b>, o latim foi falado ali por séculos. Por isso o português é chamado de “<b>a última flor do Lácio</b>” (o Lácio era a região de Roma).",
+   "Havia dois latins: o <span class='destaque'>latim vulgar</span>, informal, falado por <b>soldados, mercadores, colonos</b> e moradores das províncias ocidentais; e o <span class='destaque'>latim clássico</span>, das <b>classes mais altas</b>, usado na <b>escrita</b> e obrigatório nas missas. Com a expansão, o latim mudou e originou as <span class='destaque'>línguas latinas</span> (ou <b>neolatinas</b>, ou <b>românicas</b>): <b>italiano, francês, português, espanhol e romeno</b>. Ainda usamos expressões latinas: <i>habeas corpus</i>, <i>quorum</i>, <i>vade mecum</i>, <i>curriculum vitae</i>.",
+   "O <span class='destaque'>Direito romano</span> é considerado o <b>maior legado cultural</b> de Roma. Para resolver conflitos entre povos tão diferentes, os romanos criaram leis para todas as regiões. Começou com a <b>Lei das Doze Tábuas</b> (século V a.C.), foi aprimorado na República e, no Império, foi organizado em três partes: <b><i>Jus civile</i></b> (Direito civil), <b><i>Jus gentium</i></b> (Direito dos povos) e <b><i>Jus naturale</i></b> (Direito natural).",
+   "Do Direito romano surgiu a <span class='destaque'>jurisprudência</span>: a ideia de que um julgamento deve se basear em <b>decisões anteriores</b> sobre o mesmo assunto. Ele ainda é a base das leis de vários países, como Itália, França e <b>Brasil</b>.",
+   "<div class='olhar'><b>Olhar de prova:</b> a escrita usava o latim <b>clássico</b>; o latim <b>vulgar</b> era o do dia a dia. Não troque!</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Qual é a diferença entre o latim vulgar e o latim clássico?",modelo:"O latim vulgar era o informal, falado no dia a dia por soldados, mercadores, colonos e moradores das províncias. O latim clássico era o das classes altas, usado na escrita e nas missas.",chk:["Disse quem falava o latim vulgar (povo, soldados, comerciantes)?","Disse que o clássico era da elite e da escrita?"]},
+   {tag:"apl",q:"Explique para um colega por que dizemos que o português é “filho” do latim e cite outras duas línguas da mesma “família”.",modelo:"Porque os romanos dominaram a Península Ibérica, onde fica Portugal, e o latim foi falado lá por muito tempo. Com o tempo, esse latim foi mudando e virou o português. Outras línguas da mesma família (latinas ou românicas): espanhol, italiano, francês e romeno.",chk:["Expliquei a dominação romana da Península Ibérica?","Citei duas outras línguas latinas corretas?"]},
+   {tag:"apl",q:"Um juiz imaginário vai decidir um caso e consulta como outros juízes decidiram casos parecidos antes. Que ideia do Direito romano ele está usando? Por que isso é justo?",modelo:"Ele está usando a jurisprudência: basear o julgamento em decisões anteriores sobre o mesmo assunto. É mais justo porque casos parecidos recebem decisões parecidas, e ninguém é julgado só pela vontade de uma pessoa.",chk:["Respondi jurisprudência?","Expliquei por que é justo (casos iguais, decisões parecidas)?"]}
+  ]
+ },
+ {
+  porto:"Marco XIII · Capítulo 19 · pp. 91 e 92 (e cap. 15, p. 37)", emoji:"✝️", u:"c19",
+  titulo:"O legado: religião romana e o cristianismo",
+  texto:[
+   "Na religião romana predominavam o <span class='destaque'>politeísmo</span> e o <span class='destaque'>culto ao imperador</span>. No começo, os deuses romanos não tinham feições definidas; pelas trocas culturais com <b>gregos, egípcios e persas</b>, foram sendo ligados aos deuses dessas civilizações — por exemplo, Zeus virou <b>Júpiter</b>, Hermes virou <b>Mercúrio</b>, Afrodite virou <b>Vênus</b>, Ares virou <b>Marte</b> e Chronos virou <b>Saturno</b>. Até planetas do Sistema Solar homenageiam esses deuses.",
+   "O <span class='destaque'>cristianismo</span> se espalhou pelo Império. Em <b>313</b>, no governo de <b>Constantino I</b>, foi promulgado o <b>Edito de Milão</b>, e vários romanos passaram a se identificar como cristãos. Em <b>380</b>, pelo <b>Edito de Tessalônica</b>, o imperador <b>Teodósio I</b> tornou o cristianismo a <b>religião oficial do Império</b>.",
+   "A partir daí, praticar o <span class='destaque'>paganismo</span> (as antigas religiões greco-romanas) passou a ser punido até com <b>pena de morte</b> — mesmo assim, muitos romanos continuaram cultuando seus deuses. A palavra vem do latim <i>paganus</i>, “<b>morador do campo</b>”, “camponês”. Com o cristianismo oficial, as <b>vestais</b> perderam a influência e seus templos foram fechados.",
+   "Hoje o cristianismo tem mais de <b>2 bilhões</b> de fiéis. Alguns pesquisadores acreditam que a ideia de <b>igualdade</b> recebeu influência da doutrina cristã, segundo a qual não deveria haver distinção entre os seres humanos.",
+   "<div class='olhar'><b>Olhar de prova:</b> <b>313 = Edito de Milão (Constantino)</b> · <b>380 = Edito de Tessalônica (Teodósio): religião oficial</b>.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Quais eram as duas principais características da religião romana?",modelo:"O politeísmo, ou seja, a crença em muitos deuses, e o culto ao imperador.",chk:["Citei o politeísmo?","Citei o culto ao imperador?"]},
+   {tag:"apl",q:"Monte uma mini linha do tempo com dois fatos sobre o cristianismo em Roma (ano, imperador e o que mudou).",modelo:"313 — Constantino I promulga o Edito de Milão e muitos romanos passam a se identificar como cristãos. 380 — Teodósio I, pelo Edito de Tessalônica, torna o cristianismo a religião oficial do Império.",chk:["Coloquei 313 com Constantino e o Edito de Milão?","Coloquei 380 com Teodósio e a religião oficial?"]},
+   {tag:"apl",q:"A palavra “pagão” vem de uma palavra latina que quer dizer “camponês”. Explique, com as suas palavras, quem eram os pagãos no fim do Império e o que aconteceu com eles.",modelo:"Pagãos eram as pessoas que continuavam seguindo as religiões antigas, com os deuses greco-romanos. Depois que o cristianismo virou a religião oficial, o paganismo foi proibido e podia até ser punido com a morte, mas muitos continuaram cultuando os deuses antigos.",chk:["Expliquei que pagãos seguiam os deuses antigos?","Disse que o paganismo foi proibido/punido depois do cristianismo oficial?"]}
+  ]
+ }
+];
+
+
+/* ====== ESTADO E PERSISTÊNCIA ====== */
+var CHAVE=KIT+'_leitura_v1';
+var mem={};
+var estado=carregar();
+
+function carregar(){
+  try{ var s=localStorage.getItem(CHAVE); if(s) return JSON.parse(s); }catch(e){ if(mem[CHAVE]) return JSON.parse(mem[CHAVE]); }
+  return {blocos:{}};
+}
+function calcProgresso(){
+  var conf=0, chkPend=0;
+  BLOCOS.forEach(function(bloco,i){
+    var b=estado.blocos[i]; if(!b||!b.conferido) return; conf++;
+    bloco.perguntas.forEach(function(p,j){ var ep=(b.perguntas&&b.perguntas[j])||{chk:{}}; p.chk.forEach(function(pt,k){ if(!ep.chk||!ep.chk[k]) chkPend++; }); });
+  });
+  estado.progresso={conferidos:conf,total:BLOCOS.length,chkPendentes:chkPend};
+  if(conf===BLOCOS.length && chkPend===0){ if(!estado.concluido){ estado.concluido=true; estado.concluidoEm=new Date().toISOString(); } }
+  return estado.progresso;
+}
+function salvar(){
+  calcProgresso();
+  var s=JSON.stringify(estado);
+  try{ localStorage.setItem(CHAVE,s); }catch(e){ mem[CHAVE]=s; }
+  var d=new Date();
+  document.getElementById('salvo').textContent='💾 Salvo às '+d.toLocaleTimeString('pt-BR')+' de '+d.toLocaleDateString('pt-BR');
+  atualizarTrilhaFim();
+}
+function atualizarTrilhaFim(){
+  var p=estado.progresso||calcProgresso();
+  var box=document.getElementById('trilha-fim'), txt=document.getElementById('trilha-fim-txt'), btn=document.getElementById('btn-prox');
+  var h3=box.querySelector('h3');
+  if(estado.concluido||trilhaLiberada()){
+    h3.textContent='✅ Leitura concluída — Quiz destravado!';
+    txt.textContent=estado.concluido?'Você conferiu os 13 marcos e respondeu a autoavaliação. Agora teste o que aprendeu.':'Trilha liberada pelos pais.';
+    btn.classList.remove('off');
+  } else {
+    h3.textContent='🔒 Próxima etapa: Quiz';
+    var faltam=p.total-p.conferidos;
+    txt.textContent=faltam>0 ? 'Destrava quando você conferir os '+p.total+' marcos (faltam '+faltam+').' : 'Falta responder a autoavaliação Sim/Não de '+p.chkPendentes+' ponto(s) para destravar.';
+    btn.classList.add('off');
+  }
+  marcarNav();
+}
+function estBloco(i){ if(!estado.blocos[i]) estado.blocos[i]={aberto:i===0,conferido:false,perguntas:{}}; return estado.blocos[i]; }
+function estPerg(i,j){ var b=estBloco(i); if(!b.perguntas[j]) b.perguntas[j]={resp:'',warned:false,red:false,tentou:'',chk:{}}; return b.perguntas[j]; }
+
+/* ====== ANTICÓPIA (motor validado — Português 7º, 08/10/2026) ====== */
+function normPal(s){
+  return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/<[^>]*>/g,' ').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim().split(' ').filter(Boolean);
+}
+function maiorRun(aw,bw){
+  var bStr=' '+bw.join(' ')+' ', best=0;
+  for(var i=0;i<aw.length;i++){
+    for(var len=aw.length-i; len>0; len--){
+      var sub=aw.slice(i,i+len).join(' ');
+      if(bStr.indexOf(' '+sub+' ')>=0){ if(len>best)best=len; break; }
+    }
+  }
+  return best;
+}
+function cobertoPorRuns(aw,bw,minRun){
+  var bStr=' '+bw.join(' ')+' ', cov=new Array(aw.length).fill(false);
+  for(var i=0;i<aw.length;i++){
+    for(var len=aw.length-i; len>=minRun; len--){
+      var sub=aw.slice(i,i+len).join(' ');
+      if(bStr.indexOf(' '+sub+' ')>=0){ for(var k=i;k<i+len;k++)cov[k]=true; break; }
+    }
+  }
+  return cov.filter(Boolean).length;
+}
+function ehCopia(resp, textoBloco, pergunta){
+  var a=normPal(resp), src=normPal(textoBloco), q=normPal(pergunta);
+  if(a.length<5) return false;
+  var qStr=' '+q.join(' ')+' ', keep=new Array(a.length).fill(true);
+  for(var i=0;i<a.length;i++){
+    for(var len=a.length-i; len>=4; len--){
+      var sub=a.slice(i,i+len).join(' ');
+      if(qStr.indexOf(' '+sub+' ')>=0){ for(var k=i;k<i+len;k++)keep[k]=false; break; }
+    }
+  }
+  var af=a.filter(function(w,idx){return keep[idx];});
+  if(af.length<5) return false;
+  var run=maiorRun(af,src);
+  var cov=cobertoPorRuns(af,src,5);
+  var ratio=cov/af.length;
+  return run>=8 || ratio>0.6;
+}
+
+/* ====== RENDER ====== */
+function textoPlano(bloco){ return bloco.texto.join(' '); }
+function irBloco(i){ var el=document.getElementById('bloco'+i); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }
+
+function render(){
+  var cont=document.getElementById('blocos'); cont.innerHTML='';
+  BLOCOS.forEach(function(bloco,i){
+    var b=estBloco(i);
+    var div=document.createElement('div'); div.className='bloco '+bloco.u+(b.aberto?'':' travado'); div.id='bloco'+i;
+    var html='<div class="bloco-cab"><div class="num">'+ROM[i]+'</div><div><div class="porto">'+bloco.porto+(bloco.foco?' <span class="selo-foco">⭐ foco da revisão</span>':'')+'</div><h3>'+bloco.emoji+' '+bloco.titulo+'</h3></div></div>';
+    if(!b.aberto){
+      html+='<div class="cadeado">🔒 Este marco abre quando você conferir o marco anterior.</div>';
+      div.innerHTML=html; cont.appendChild(div); return;
+    }
+    html+='<div class="bloco-corpo"><div class="texto">';
+    bloco.texto.forEach(function(p){ html+= (p.indexOf('<div')===0 || p.indexOf('<ul')===0 ? p : '<p>'+p+'</p>'); });
+    html+='</div>';
+    bloco.perguntas.forEach(function(p,j){
+      var ep=estPerg(i,j);
+      var tagTxt=p.tag==='conc'?'Conceito':'Aplicação';
+      html+='<div class="perg'+(ep.red?' red':'')+'" id="perg'+i+'_'+j+'">';
+      html+='<span class="tag '+p.tag+'">'+tagTxt+'</span>';
+      html+='<label>'+(j+1)+'. '+p.q+'</label>';
+      html+='<textarea id="ta'+i+'_'+j+'" oninput="digitou('+i+','+j+')">'+(ep.resp||'')+'</textarea>';
+      html+='<div class="aviso" id="av'+i+'_'+j+'"></div>';
+      html+='<div class="modelo" id="mod'+i+'_'+j+'"><span class="lab">Resposta-modelo</span><p>'+p.modelo+'</p>';
+      html+='<div class="chk" id="chk'+i+'_'+j+'"></div></div>';
+      html+='</div>';
+    });
+    html+='<button class="conferir" id="conf'+i+'" onclick="conferir('+i+')">✔️ Conferir este marco</button>';
+    html+='<div class="status-bloco" id="st'+i+'"></div>';
+    if(i<BLOCOS.length-1){ html+='<div class="prox" id="px'+i+'"></div>'; }
+    html+='</div>';
+    div.innerHTML=html;
+    cont.appendChild(div);
+  });
+  BLOCOS.forEach(function(bloco,i){
+    var b=estBloco(i);
+    if(b.aberto && b.conferido){ mostrarConferido(i); }
+    atualizarBotao(i);
+  });
+  atualizarRelatorio();
+  atualizarTrilhaFim();
+}
+
+function digitou(i,j){
+  var ep=estPerg(i,j);
+  ep.resp=document.getElementById('ta'+i+'_'+j).value;
+  if(ep.red){
+    var bloco=BLOCOS[i];
+    if(!ehCopia(ep.resp, textoPlano(bloco), bloco.perguntas[j].q)){
+      ep.red=false;
+      var pd=document.getElementById('perg'+i+'_'+j); if(pd) pd.classList.remove('red');
+      var av=document.getElementById('av'+i+'_'+j); if(av){av.className='aviso'; av.textContent='';}
+    }
+  }
+  atualizarBotao(i);
+  salvar();
+  atualizarRelatorio();
+}
+
+function atualizarBotao(i){
+  var b=estBloco(i); if(!b.aberto) return;
+  var btn=document.getElementById('conf'+i); if(!btn) return;
+  var todas=true;
+  BLOCOS[i].perguntas.forEach(function(p,j){
+    var v=(document.getElementById('ta'+i+'_'+j)||{}).value||estPerg(i,j).resp||'';
+    if(v.trim().length<3) todas=false;
+  });
+  btn.disabled=!todas;
+}
+
+function conferir(i){
+  var bloco=BLOCOS[i], b=estBloco(i);
+  var algumBloqueado=false;
+  bloco.perguntas.forEach(function(p,j){
+    var ep=estPerg(i,j);
+    ep.resp=document.getElementById('ta'+i+'_'+j).value;
+    var av=document.getElementById('av'+i+'_'+j);
+    var copia=ehCopia(ep.resp, textoPlano(bloco), p.q);
+    if(copia){
+      if(!ep.warned){
+        ep.warned=true; ep.tentou=ep.resp;
+        av.className='aviso amarelo';
+        av.innerHTML='✋ Boa parte da sua resposta está igual ao texto. Tente <b>reescrever com as suas palavras</b> — explique como se fosse para um amigo, sem olhar o texto. Pode ficar mais curto e simples: o que vale é ser <b>SEU</b>.';
+        algumBloqueado=true;
+      } else {
+        ep.red=true;
+        av.className='aviso vermelho';
+        av.innerHTML='🔴 Esta resposta continua muito parecida com o texto. Ela foi aceita, mas ficou marcada para revisar. Se reescrever com as suas palavras, a marca some.';
+        document.getElementById('perg'+i+'_'+j).classList.add('red');
+      }
+    } else {
+      ep.red=false;
+      if(av){ av.className='aviso'; av.textContent=''; }
+      var pd=document.getElementById('perg'+i+'_'+j); if(pd) pd.classList.remove('red');
+    }
+  });
+  salvar();
+  if(algumBloqueado){
+    document.getElementById('st'+i).innerHTML='<span style="color:var(--ambar)">✍️ Reescreva as respostas marcadas em amarelo e clique em Conferir de novo.</span>';
+    return;
+  }
+  b.conferido=true;
+  if(i<BLOCOS.length-1){ estBloco(i+1).aberto=true; }
+  salvar();
+  render();
+  var alvo=document.getElementById('bloco'+i);
+  if(alvo) alvo.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function mostrarConferido(i){
+  var bloco=BLOCOS[i];
+  bloco.perguntas.forEach(function(p,j){
+    var ep=estPerg(i,j);
+    var mod=document.getElementById('mod'+i+'_'+j); if(mod) mod.classList.add('show');
+    if(ep.red){ var pd=document.getElementById('perg'+i+'_'+j); if(pd) pd.classList.add('red');
+      var av=document.getElementById('av'+i+'_'+j); if(av){av.className='aviso vermelho'; av.innerHTML='🔴 Resposta marcada para revisar (muito parecida com o texto). Reescreva com as suas palavras para tirar a marca.';}
+    }
+    var chk=document.getElementById('chk'+i+'_'+j); if(chk){
+      var h='<b style="font-size:.8rem;color:#8fe0b4">Confira você: a sua resposta…</b>';
+      p.chk.forEach(function(pt,k){
+        var val=ep.chk[k]||'';
+        h+='<div class="item"><span>'+pt+'</span><span class="simnao">'
+         +'<button class="sim'+(val==='sim'?' ativo':'')+'" onclick="marcarChk('+i+','+j+','+k+',\'sim\')">Sim</button>'
+         +'<button class="nao'+(val==='nao'?' ativo':'')+'" onclick="marcarChk('+i+','+j+','+k+',\'nao\')">Não</button>'
+         +'</span></div>';
+      });
+      chk.innerHTML=h;
+    }
+  });
+  atualizarStatusBloco(i);
+  var btn=document.getElementById('conf'+i); if(btn){ btn.textContent='✔️ Marco conferido'; btn.disabled=true; }
+  if(i<BLOCOS.length-1){
+    var px=document.getElementById('px'+i);
+    if(px) px.innerHTML='<a href="#bloco'+(i+1)+'" onclick="irBloco('+(i+1)+');return false;">➡️ Seguir para o próximo marco</a>';
+  }
+}
+
+function marcarChk(i,j,k,val){
+  var ep=estPerg(i,j); ep.chk[k]=val;
+  salvar(); mostrarConferido(i); atualizarStatusBloco(i); atualizarRelatorio();
+}
+
+function statusPergunta(i,j){
+  var ep=estPerg(i,j), p=BLOCOS[i].perguntas[j];
+  if(ep.red) return 'revisar';
+  var temNao=false, todasResp=true;
+  p.chk.forEach(function(pt,k){ if(ep.chk[k]==='nao') temNao=true; if(!ep.chk[k]) todasResp=false; });
+  if(temNao) return 'revisar';
+  if(!todasResp) return 'pendente';
+  return 'ok';
+}
+function atualizarStatusBloco(i){
+  var st=document.getElementById('st'+i); if(!st) return;
+  var revisar=false, pendente=false;
+  BLOCOS[i].perguntas.forEach(function(p,j){ var s=statusPergunta(i,j); if(s==='revisar')revisar=true; if(s==='pendente')pendente=true; });
+  if(revisar) st.innerHTML='<span style="color:#ffb3b3">🔁 Este marco tem pontos para revisar.</span>';
+  else if(pendente) st.innerHTML='<span style="color:var(--ambar)">📝 Responda a autoavaliação (Sim/Não) de cada pergunta.</span>';
+  else st.innerHTML='<span style="color:#8fe0b4">✅ Marco concluído com sucesso!</span>';
+  atualizarRelatorio();
+}
+
+function atualizarRelatorio(){
+  var lista=[], totalConf=0, totalRed=0, totalNao=0;
+  BLOCOS.forEach(function(bloco,i){
+    var b=estBloco(i); if(!b.conferido) return; totalConf++;
+    bloco.perguntas.forEach(function(p,j){
+      var ep=estPerg(i,j);
+      if(ep.red){ totalRed++; lista.push('Marco '+ROM[i]+' ('+bloco.titulo+'): pergunta '+(j+1)+' — resposta muito parecida com o texto.'); }
+      p.chk.forEach(function(pt,k){ if(ep.chk[k]==='nao'){ totalNao++; lista.push('Marco '+ROM[i]+' ('+bloco.titulo+'): revisar — "'+pt+'"'); } });
+    });
+  });
+  var rev=document.getElementById('revisar'), rl=document.getElementById('revisar-lista');
+  if(lista.length){ rev.style.display='block'; rl.innerHTML=lista.map(function(x){return '<li>'+x+'</li>';}).join(''); }
+  else { rev.style.display='none'; rl.innerHTML=''; }
+  var rc=document.getElementById('rel-conteudo');
+  rc.innerHTML='<b>Marcos conferidos:</b> '+totalConf+' de '+BLOCOS.length+'.<br>'
+    +'<b>Respostas marcadas (muito parecidas com o texto):</b> '+totalRed+'.<br>'
+    +'<b>Pontos marcados como "Não" na autoavaliação:</b> '+totalNao+'.<br>'
+    +(lista.length? '<span style="color:#ffb3b3">Há '+lista.length+' ponto(s) para revisar (lista acima).</span>' : '<span style="color:#8fe0b4">Sem pontos pendentes para revisar. 👏</span>');
+}
+
+/* ====== EXPORTAR / IMPORTAR / ZERAR ====== */
+function exportar(){
+  var dados=JSON.stringify(estado,null,2);
+  var blob=new Blob([dados],{type:'application/json'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='leitura-guiada_todos-os-caminhos.json'; a.click();
+}
+function importar(ev){
+  var f=ev.target.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(){ try{ estado=JSON.parse(r.result); salvar(); render(); mostrarModal('✅ Progresso importado!',false); }catch(e){ mostrarModal('❌ Arquivo inválido.',false); } };
+  r.readAsText(f);
+}
+var acaoZerar=null;
+function pedirZerar(){ acaoZerar=true; mostrarModal('Tem certeza que quer apagar TODO o progresso desta leitura? (O Quiz continua destravado se já tiver sido destravado.)',true); }
+function mostrarModal(txt,confirmar){
+  document.getElementById('modal-txt').innerHTML=txt;
+  document.getElementById('modal').classList.add('show');
+  document.getElementById('modal-cancel').style.display=confirmar?'inline-block':'none';
+  document.getElementById('modal-ok').textContent=confirmar?'Sim, apagar':'Ok';
+  document.getElementById('modal-ok').onclick=function(){ if(confirmar && acaoZerar){ var c=estado.concluido, ce=estado.concluidoEm; estado={blocos:{}}; if(c){estado.concluido=true; estado.concluidoEm=ce;} salvar(); render(); } acaoZerar=null; fecharModal(); };
+}
+function fecharModal(){ document.getElementById('modal').classList.remove('show'); }
+
+render();
+</script>
+</body>
+</html>

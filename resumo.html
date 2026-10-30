@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumo · Todos os Caminhos · História 6º</title>
+<style>
+  :root{--palco:#14161c;--palco2:#1d2029;--aco:#343846;--aco2:#4a4f60;--ambar:#f2c14e;--magenta:#e08a3c;--ciano:#c06be0;--verde:#7fcf6a;--vermelho:#ff5d5d;--texto:#f1ece2;--cinza:#a39e94}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:radial-gradient(1100px 480px at 50% -10%,#2a1838,#14161c 60%),var(--palco);color:var(--texto);line-height:1.6;padding-bottom:60px}
+  header{background:linear-gradient(120deg,#1f1428,#3a2416);padding:26px 18px;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.5);border-bottom:4px solid var(--amarelo,#f2c14e);border-bottom-color:var(--ambar)}
+  header .selo{font-size:.78rem;letter-spacing:2px;color:#ffe9ad;text-transform:uppercase}
+  header h1{font-size:1.5rem;margin:6px 0 2px}
+  header p{color:#efe2d0;font-size:.92rem}
+  .wrap{max-width:900px;margin:0 auto;padding:16px}
+  .barra-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+  .barra-nav a{background:var(--palco2);color:var(--texto);text-decoration:none;padding:7px 12px;border-radius:20px;font-size:.85rem;border:1px solid var(--aco)}
+  .barra-nav a.on{background:var(--ambar);color:#2a2000;font-weight:bold}
+  .barra-nav a.lock{opacity:.5}
+  .intro{background:var(--palco2);border:1px solid var(--aco);border-radius:14px;padding:16px;margin-bottom:16px}
+  .intro h2{color:var(--ambar);font-size:1.1rem;margin-bottom:8px}
+  .sec{margin:26px 0 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .sec h2{font-size:1.25rem}
+  .sec .pill{font-size:.7rem;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:12px;background:var(--ciano);color:#1a0826;font-weight:bold}
+  .sec .pill.c16{background:var(--magenta);color:#3a1500}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+  .card{background:var(--palco2);border:1px solid var(--aco);border-radius:14px;padding:14px;border-top:4px solid var(--ciano)}
+  .card.c16{border-top-color:var(--magenta)}
+  .card h3{font-size:1rem;margin-bottom:8px}
+  .card ul{margin-left:18px}
+  .card li{margin-bottom:5px;font-size:.93rem}
+  .card b{color:var(--ciano)}
+  .card.c16 b{color:var(--magenta)}
+  .postit{background:#ffe88a;color:#3a2a00;border-radius:4px;padding:12px 14px;font-size:.92rem;box-shadow:3px 4px 10px rgba(0,0,0,.4);transform:rotate(-1deg);margin:12px 0}
+  .postit b{color:#7a4a00}
+  .peg{background:#3a1414;border:2px solid var(--vermelho);border-radius:12px;padding:12px 14px;margin:12px 0;font-size:.92rem}
+  .peg b{color:#ffb3b3}
+  .flips{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .flip{perspective:900px;height:200px;cursor:pointer}
+  .flip .inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .flip.on .inner{transform:rotateY(180deg)}
+  .flip .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:.88rem}
+  .flip .front{background:linear-gradient(135deg,#2b2438,#1d2029);border:1px solid var(--aco2);font-weight:bold}
+  .flip .front small{display:block;color:var(--cinza);font-weight:normal;font-size:.72rem;margin-top:6px}
+  .flip .back{background:#0e2b1f;border:1px solid var(--verde);transform:rotateY(180deg)}
+  .tabela{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px}
+  .tabela th,.tabela td{border:1px solid var(--aco);padding:7px 9px;text-align:left;vertical-align:top}
+  .tabela th{background:#252836}
+  .fluxo{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin-top:8px}
+  .fluxo .et{flex:1;min-width:120px;background:#1a1c24;border:1px solid var(--aco2);border-left:4px solid var(--magenta);border-radius:0 10px 10px 0;padding:10px;font-size:.86rem}
+  .fluxo .et b{color:var(--magenta)}
+  .gloss{columns:2;column-gap:18px}
+  .gloss div{break-inside:avoid;margin-bottom:8px;font-size:.9rem}
+  .gloss b{color:var(--ambar)}
+  @media(max-width:600px){.gloss{columns:1}}
+  .fim{background:linear-gradient(120deg,#122a1f,#163a2a);border:2px solid var(--verde);border-radius:16px;padding:18px;margin-top:24px;text-align:center}
+  .fim h3{color:#8fe0b4;margin-bottom:8px}
+  .fim button{background:var(--verde);color:#04231a;border:none;border-radius:10px;padding:12px 20px;font-size:1rem;font-weight:bold;margin:6px}
+  .fim button:disabled{background:#2a2d38;color:#6f7794;cursor:not-allowed}
+  .fim a.btn{display:inline-block;margin:6px;background:var(--ciano);color:#1a0826;text-decoration:none;font-weight:bold;padding:12px 20px;border-radius:10px}
+  .fim a.btn.off{background:#2a2d38;color:#6f7794;pointer-events:none}
+  .painel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;background:var(--palco2);border:1px solid var(--aco);border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:.85rem}
+  .mini{background:var(--palco);color:var(--texto);border:1px solid var(--aco2);border-radius:8px;padding:6px 10px;font-size:.8rem;cursor:pointer;font-family:inherit}
+  .modal-bg{display:none;position:fixed;inset:0;background:rgba(5,4,8,.96);z-index:50;align-items:center;justify-content:center;padding:16px}
+  .modal-bg.show{display:flex}
+  .modal{background:var(--palco2);border:1px solid var(--ciano);border-radius:14px;padding:22px;max-width:440px;text-align:center}
+  .modal p{margin-bottom:14px}
+  .modal .big{font-size:2.2rem}
+  .modal a{display:inline-block;background:var(--ciano);color:#1a0826;border-radius:8px;padding:10px 18px;font-weight:bold;text-decoration:none}
+  .rodape{text-align:center;color:var(--cinza);font-size:.8rem;margin-top:24px}
+  .sec .pill.c15{background:var(--magenta);color:#3a1500}
+  .sec .pill.c19{background:var(--verde);color:#04231a}
+  .card.c15{border-top-color:var(--magenta)} .card.c15 b{color:var(--magenta)}
+  .card.c19{border-top-color:var(--verde)} .card.c19 b{color:var(--verde)}
+  .flip .back b{color:#8fe0b4}
+  .bloco-cab .num{width:auto!important;min-width:34px;padding:0 7px;font-size:.9rem}
+  .bloco.c14 .bloco-cab .num{background:var(--ciano);color:#1a0826}
+  .bloco.c14 .texto .destaque{color:var(--ciano)}
+  .bloco.c15 .bloco-cab .num{background:var(--magenta);color:#2a1200}
+  .bloco.c15 .texto .destaque{color:#f0a868}
+  .card.c15 b{color:#f0a868}
+</style>
+</head>
+<body>
+<header>
+  <div class="selo">Todos os Caminhos · História 6º ano · CCF</div>
+  <h1>🗺️ Resumo</h1>
+  <p>Tudo que cai, em cards, cartas e post-its · Caps. 13, 14, 15, 19 e 20</p>
+</header>
+
+<div class="wrap">
+  <nav class="barra-nav" id="nav">
+    <a href="leitura-guiada.html">📖 Leitura Guiada</a>
+    <a href="quiz.html">🎯 Quiz</a>
+    <a class="on" href="resumo.html">🗺️ Resumo</a>
+    <a href="simulado.html" data-etapa="simulado">📝 Simulado</a>
+    <a href="index.html">🏠 Início</a>
+  </nav>
+
+  <div class="intro">
+    <h2>🗺️ O Mapa da Estrada</h2>
+    <p>Aqui está a estrada inteira numa página só: as <b>origens e a República</b> (Cap. 14), o <b>Império</b> (Cap. 15) e o <b>legado romano</b> (Cap. 19). Tudo saiu do seu livro (Callis História 6 – Livro 2). <b>Toque nas cartas</b> para virar. Leia até o fim e clique em <b>“Li o resumo até o fim”</b> para destravar o Simulado.</p>
+  </div>
+
+  <div class="painel"><span id="salvo">📏 Rolagem máxima: 0%</span><button class="mini" onclick="exportar()">📥 Exportar</button></div>
+
+  <div class="sec"><h2>🕰️ A estrada no tempo</h2></div>
+  <div class="fluxo">
+    <div class="et"><b>Séc. VIII a.C.</b><br>Aldeias latinas se unem perto do rio Tibre (Monte Aventino)</div>
+    <div class="et"><b>753–509 a.C.</b><br>MONARQUIA (reis; Senado ajuda; reis etruscos c. 600 a.C.)</div>
+    <div class="et"><b>509–27 a.C.</b><br>REPÚBLICA (Senado, magistraturas, lutas da plebe, expansão)</div>
+    <div class="et"><b>27 a.C.–476 d.C.</b><br>IMPÉRIO (Otávio Augusto, pax romana, romanização)</div>
+  </div>
+  <div class="fluxo">
+    <div class="et"><b>494 a.C.</b><br>tribuno da plebe</div>
+    <div class="et"><b>450 a.C.</b><br>Lei das Doze Tábuas</div>
+    <div class="et"><b>445 a.C.</b><br>Lei Canuleia</div>
+    <div class="et"><b>366 a.C.</b><br>fim da escravidão por dívida</div>
+    <div class="et"><b>264–146 a.C.</b><br>Guerras Púnicas</div>
+    <div class="et"><b>133 / 123 a.C.</b><br>Tibério / Caio Graco</div>
+    <div class="et"><b>60 a.C.</b><br>1º Triunvirato</div>
+    <div class="et"><b>44 a.C.</b><br>César assassinado</div>
+    <div class="et"><b>27 a.C.</b><br>Otávio vira Augusto</div>
+    <div class="et"><b>313 / 380</b><br>Edito de Milão / Edito de Tessalônica</div>
+  </div>
+
+  <!-- ================== CAP 14 ================== -->
+  <div class="sec"><span class="pill">Cap. 14</span><h2>🐺 Roma: das origens à República</h2></div>
+  <div class="grid">
+    <div class="card"><h3>Lenda × história</h3><ul>
+      <li><b>Lenda:</b> Rômulo e Remo, filhos do deus <b>Marte</b> e de Reia Sílvia, jogados no rio <b>Tibre</b> e amamentados por uma <b>loba</b>. Rômulo mata Remo e vira o 1º rei.</li>
+      <li>A lenda <b>engrandecia</b> o passado romano. Sem dados concretos: quem investiga é a <b>Arqueologia</b>.</li>
+      <li><b>Italiotas:</b> sabinos, úmbrios, samnitas e latinos. Também etruscos, celtas, cartagineses e gregos (<b>Magna Grécia</b>).</li></ul></div>
+    <div class="card"><h3>👑 Monarquia e sociedade</h3><ul>
+      <li>Rei escolhido entre os patrícios + <b>Senado</b> (conselho de anciãos patrícios que ajudava o rei e escolhia o sucessor).</li>
+      <li><b>Patrícios</b> (elite, donos de terra) · <b>clientes</b> (favores) · <b>plebeus</b> (maioria, sem voz política) · <b>escravos</b> (por dívida ou guerra).</li>
+      <li><b>Reis etruscos</b> (c. 600 a.C.) → patrícios perdem poder → Senado expulsa os etruscos → <b>República</b>.</li></ul></div>
+    <div class="card"><h3>🏛️ República = <i>res publica</i></h3><ul>
+      <li>“<b>Coisa pública</b>”: governo para o bem de todos... na teoria.</li>
+      <li>O <b>Senado</b> (só patrícios) era o órgão mais poderoso: tradições, contas públicas, política externa, guerra e paz.</li>
+      <li><b>Assembleia das Centúrias</b>: dividida pela renda; quem não se armava não votava.</li></ul></div>
+  </div>
+
+  <div class="sec"><span class="pill">Cap. 14</span><h2>⚖️ Magistraturas da República (p. 15)</h2></div>
+  <table class="tabela">
+    <thead><tr><th>Cargo</th><th>O que fazia</th></tr></thead>
+    <tbody>
+      <tr><td><b>Cônsules</b> (2)</td><td>Autoridade executiva máxima: administravam Roma (política e guerra).</td></tr>
+      <tr><td><b>Pretores</b></td><td>Aplicavam a justiça.</td></tr>
+      <tr><td><b>Censores</b></td><td>Contavam os cidadãos e os dividiam pela riqueza.</td></tr>
+      <tr><td><b>Questores</b></td><td>Cobravam impostos e administravam o tesouro.</td></tr>
+      <tr><td><b>Edis</b></td><td>Policiamento e abastecimento da cidade.</td></tr>
+      <tr><td><b>Ditador</b></td><td>Indicado pelo Senado só em crise, por 6 meses, com poderes ilimitados.</td></tr>
+      <tr><td><b>Tribunos da plebe</b></td><td>Plebeus que podiam vetar leis que prejudicassem a sua classe.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec"><span class="pill">Cap. 14</span><h2>✊ A luta da plebe e a expansão</h2></div>
+  <div class="grid">
+    <div class="card"><h3>Por que os plebeus lutaram?</h3><ul>
+      <li>Pobreza, terras só dos patrícios, <b>casamento proibido</b> entre os grupos.</li>
+      <li>Serviam no exército → perdiam o trabalho → <b>dívidas</b> → escravidão.</li>
+      <li><b>Estratégia:</b> abandonar a cidade e recusar o exército.</li></ul></div>
+    <div class="card"><h3>As conquistas</h3><ul>
+      <li><b>494 a.C.</b> tribuno da plebe (veto).</li>
+      <li><b>450 a.C.</b> Lei das Doze Tábuas: 1ª lei <b>escrita</b>, em 12 placas de bronze no Fórum.</li>
+      <li><b>445 a.C.</b> Lei Canuleia: casamento permitido.</li>
+      <li><b>366 a.C.</b> fim da escravidão por dívida.</li>
+      <li>Mas a <b>desigualdade continuou</b> (terra).</li></ul></div>
+    <div class="card"><h3>⚔️ Expansão</h3><ul>
+      <li>Península Itálica: +200 anos; de <b>defensiva</b> a <b>ofensiva</b>.</li>
+      <li><b>Guerras Púnicas</b> × Cartago (púnicos = fenícios): 1ª Sicília/Sardenha/Córsega; 2ª <b>Aníbal</b> e elefantes; 3ª Cartago destruída.</li>
+      <li><b>Mare Nostrum</b> = “nosso mar”: comércio + mais escravos.</li></ul></div>
+  </div>
+
+  <div class="postit">📌 <b>Dica de prova:</b> as grandes conquistas foram na <b>REPÚBLICA</b>, comandadas pelo <b>Senado</b>. No Império, a expansão diminuiu (mas chegou ao máximo com Trajano).</div>
+
+  <!-- ================== CAP 15 ================== -->
+  <div class="sec"><span class="pill c15">Cap. 15</span><h2>🦅 Império Romano: expansão, política e escravismo</h2></div>
+  <div class="grid">
+    <div class="card c15"><h3>🌾 Crise da República</h3><ul>
+      <li>Elite cria <b>latifúndios</b> com trabalho escravo → preços baixos → pequenos produtores quebram → <b>êxodo rural</b>.</li>
+      <li><b>Tibério Graco</b> (tribuno): reforma agrária, limitar terras → assassinado em <b>133 a.C.</b></li>
+      <li><b>Caio Graco</b> (123 a.C.): mais participação plebeia e comida mais barata → morto → <b>guerras civis</b>.</li></ul></div>
+    <div class="card c15"><h3>🗡️ Generais no poder</h3><ul>
+      <li>Generais (<b>imperatores</b>) usam a fidelidade dos soldados.</li>
+      <li><b>1º Triunvirato (60 a.C.):</b> Pompeu, Crasso e Júlio César.</li>
+      <li><b>César:</b> Guerras Gálicas; atravessa o <b>Rubicão</b> (49 a.C.); ditador vitalício; calendário juliano; morto em 44 a.C.</li>
+      <li><b>2º Triunvirato:</b> Marco Antônio, Lépido e Caio Otávio.</li></ul></div>
+    <div class="card c15"><h3>👑 Otávio Augusto</h3><ul>
+      <li>Reconhecido pelo Senado (31 a.C.); título de <b>Augusto</b> (27 a.C.) = “sagrado, elevado”.</li>
+      <li>Bases do Império: <b>escravidão + impostos das províncias + poder do imperador apoiado no exército</b>.</li>
+      <li>Manteve Senado e magistraturas, <b>sem o poder de antes</b>. Guarda pretoriana, estradas, pontes.</li>
+      <li>Sucessão <b>por indicação e adoção</b>, não por herança.</li></ul></div>
+    <div class="card c15"><h3>💰 Economia</h3><ul>
+      <li><b>Comercial:</b> trocas entre províncias e Império.</li>
+      <li><b>Monetária:</b> muitas moedas, com homenagem aos imperadores.</li>
+      <li>Escravizados: agricultura, minas, obras, oficinas, músicos, professores, gladiadores.</li>
+      <li>Estradas: cerca de <b>80 mil km</b>.</li></ul></div>
+    <div class="card c15"><h3>🎭 Cotidiano</h3><ul>
+      <li><b>Pão e circo:</b> comida + espetáculos (teatro, bigas e quadrigas, gladiadores) para manipular e ganhar apoio.</li>
+      <li>Família <b>patriarcal</b>. Mulheres: propriedade e estudo, mas <b>sem voto</b>.</li>
+      <li><b>Vestais:</b> 6 sacerdotisas que mantinham aceso o fogo de Vesta.</li></ul></div>
+    <div class="card c15"><h3>🕊️ Pax romana e romanização</h3><ul>
+      <li><b>Pax romana</b> (séc. I–II d.C.; Síntese: 27 a.C.–180 d.C.): menos guerras de expansão, mas exército controlando revoltas = <b>paz armada</b>.</li>
+      <li><b>Trajano</b>: máxima extensão (~5 milhões de km²).</li>
+      <li><b>Romanização:</b> fórum, estradas, aquedutos, leis, impostos, culto oficial e moedas com o rosto do imperador nas províncias.</li></ul></div>
+  </div>
+
+  <div class="sec"><span class="pill c15">Cap. 15</span><h2>🏗️ Arquitetura: vire as cartas</h2></div>
+  <div class="flips">
+    <div class="flip" onclick="this.classList.toggle('on')"><div class="inner"><div class="face front">🔺 Frontão + colunata<small>grego ou romano?</small></div><div class="face back"><b>Estilo grego</b> adotado pelos romanos: topo triangular + colunas simétricas. Ex.: Casa Branca, Igreja da Candelária.</div></div></div>
+    <div class="flip" onclick="this.classList.toggle('on')"><div class="inner"><div class="face front">🌈 Arco<small>para que servia?</small></div><div class="face back"><b>Criação romana</b>, erguido para <b>comemorar vitórias militares</b>.</div></div></div>
+    <div class="flip" onclick="this.classList.toggle('on')"><div class="inner"><div class="face front">⛪ Abóbada<small>o que é?</small></div><div class="face back">Cobertura <b>curva</b> entre arcos e muros, comum em <b>templos</b>. Muito usada depois na Idade Média.</div></div></div>
+    <div class="flip" onclick="this.classList.toggle('on')"><div class="inner"><div class="face front">💧 Aqueduto<small>função?</small></div><div class="face back">Transportava <b>água</b> de longe para chafarizes, termas, banheiros e casas.</div></div></div>
+    <div class="flip" onclick="this.classList.toggle('on')"><div class="inner"><div class="face front">♨️ Termas<small>o que tinha lá?</small></div><div class="face back">Banhos públicos: saunas, piscinas, ginástica, bibliotecas. Para <b>todas as classes</b>.</div></div></div>
+    <div class="flip" onclick="this.classList.toggle('on')"><div class="inner"><div class="face front">🏛️ Fórum<small>o que acontecia?</small></div><div class="face back">Grande <b>praça central</b>: ordens imperiais, desfiles de generais, negócios e política.</div></div></div>
+  </div>
+
+  <div class="sec"><span class="pill c15">Caps. 15 e 19</span><h2>⚡ Deuses: nome grego → nome romano (p. 38)</h2></div>
+  <table class="tabela">
+    <thead><tr><th>Romano</th><th>Grego</th><th>Deus de...</th></tr></thead>
+    <tbody>
+      <tr><td><b>Júpiter</b></td><td>Zeus</td><td>trovão; senhor dos deuses e dos homens</td></tr>
+      <tr><td><b>Juno</b></td><td>Hera</td><td>casamento e maternidade</td></tr>
+      <tr><td><b>Vênus</b></td><td>Afrodite</td><td>amor e beleza</td></tr>
+      <tr><td><b>Marte</b></td><td>Ares</td><td>guerra</td></tr>
+      <tr><td><b>Netuno</b></td><td>Poseidon</td><td>mares</td></tr>
+      <tr><td><b>Minerva</b></td><td>Atena</td><td>sabedoria e guerra estratégica</td></tr>
+      <tr><td><b>Mercúrio</b></td><td>Hermes</td><td>comércio; mensageiro</td></tr>
+      <tr><td><b>Baco</b></td><td>Dionísio</td><td>vinho e festas</td></tr>
+      <tr><td><b>Diana</b></td><td>Ártemis</td><td>caça</td></tr>
+      <tr><td><b>Ceres</b></td><td>Deméter</td><td>colheitas e agricultura</td></tr>
+      <tr><td><b>Plutão</b></td><td>Hades</td><td>submundo</td></tr>
+      <tr><td><b>Vulcano</b></td><td>Hefesto</td><td>fogo e metalurgia</td></tr>
+      <tr><td><b>Apolo</b></td><td>Apolo</td><td>Sol e música</td></tr>
+      <tr><td><b>Vesta</b></td><td>Héstia</td><td>lareiras (fogo das vestais)</td></tr>
+      <tr><td><b>Saturno</b></td><td>Chronos</td><td>(citado no cap. 19, p. 92)</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ================== CAP 19 ================== -->
+  <div class="sec"><span class="pill c19">Cap. 19</span><h2>📜 O legado cultural dos romanos</h2></div>
+  <div class="grid">
+    <div class="card c19"><h3>🗣️ Latim</h3><ul>
+      <li>Português = latim modificado: “a última flor do <b>Lácio</b>”.</li>
+      <li><b>Vulgar:</b> informal (soldados, mercadores, colonos). <b>Clássico:</b> elite, <b>escrita</b>, missas.</li>
+      <li>Línguas <b>latinas / neolatinas / românicas</b>: italiano, francês, português, espanhol, romeno.</li>
+      <li>Expressões: <i>habeas corpus, quorum, vade mecum, curriculum vitae</i>.</li></ul></div>
+    <div class="card c19"><h3>⚖️ Direito romano</h3><ul>
+      <li>O <b>maior legado cultural</b> de Roma; base das leis de vários países, incluindo o Brasil.</li>
+      <li>Doze Tábuas → aprimorado na República → no Império: <b>Jus civile, Jus gentium, Jus naturale</b>.</li>
+      <li><b>Jurisprudência:</b> julgar com base em decisões anteriores.</li></ul></div>
+    <div class="card c19"><h3>✝️ Religião</h3><ul>
+      <li><b>Politeísmo + culto ao imperador</b>; deuses ligados aos de gregos, egípcios e persas.</li>
+      <li><b>313</b> Edito de Milão (Constantino I). <b>380</b> Edito de Tessalônica (Teodósio I): cristianismo <b>religião oficial</b>.</li>
+      <li><b>Paganismo</b> (de <i>paganus</i>, “camponês”) punido até com morte.</li></ul></div>
+  </div>
+
+  <div class="sec"><h2>⚠️ Pegadinhas que mais derrubam</h2></div>
+  <div class="peg"><b>Lei das Doze Tábuas ≠ Lei Canuleia.</b> Doze Tábuas (450 a.C.) = leis ESCRITAS. Canuleia (445 a.C.) = CASAMENTO entre patrícios e plebeus.</div>
+  <div class="peg"><b>1º Triunvirato ≠ 2º Triunvirato.</b> 1º: Pompeu, Crasso, César. 2º: Marco Antônio, Lépido, Otávio.</div>
+  <div class="peg"><b>Censor ≠ questor ≠ edil.</b> Censor conta cidadãos; questor cuida do dinheiro; edil cuida do policiamento e abastecimento.</div>
+  <div class="peg"><b>Latim clássico = escrita.</b> O latim vulgar era o do dia a dia.</div>
+  <div class="peg"><b>Augusto não fechou o Senado.</b> Manteve, mas sem o poder de antes.</div>
+  <div class="postit">📌 <b>Lembre:</b> no Império a sucessão era por <b>adoção</b>; a pax romana foi uma <b>paz armada</b>; e o maior legado de Roma, segundo o livro, é o <b>Direito</b>.</div>
+
+  <div class="sec"><h2>📖 Glossário da estrada</h2></div>
+  <div class="gloss">
+    <div><b>Arrendar:</b> ceder bens por um tempo, cobrando um valor fixo.</div>
+    <div><b>Calamidade:</b> desastre que atinge muita gente.</div>
+    <div><b>Centúria:</b> grupo de cem homens do exército.</div>
+    <div><b>Êxodo rural:</b> saída das pessoas do campo para a cidade.</div>
+    <div><b>Imperatores:</b> generais que passaram a buscar o poder político.</div>
+    <div><b>Italiotas:</b> sabinos, úmbrios, samnitas e latinos.</div>
+    <div><b>Jurisprudência:</b> julgar com base em decisões anteriores.</div>
+    <div><b>Latifúndio:</b> grande propriedade rural privada.</div>
+    <div><b>Magistraturas:</b> cargos eleitos da República.</div>
+    <div><b>Mare Nostrum:</b> “nosso mar”, o Mediterrâneo.</div>
+    <div><b>Monarquia:</b> governo de um só (rei ou rainha).</div>
+    <div><b>Paganismo:</b> antigas religiões greco-romanas (<i>paganus</i> = camponês).</div>
+    <div><b>Panteão:</b> conjunto de deuses de um povo (ou templo de vários deuses).</div>
+    <div><b>Província:</b> divisão administrativa do Império.</div>
+    <div><b>Púnicos:</b> nome que os romanos davam aos fenícios.</div>
+    <div><b>Reforma agrária:</b> redistribuir terras para promover justiça social.</div>
+    <div><b>Romanização:</b> espalhar costumes, leis e construções de Roma pelo Império.</div>
+    <div><b>Senado:</b> “conselho dos antigos”, assembleia dos patrícios.</div>
+    <div><b>Triunvirato:</b> governo de três homens.</div>
+  </div>
+
+  <div class="sec"><h2>✅ Estou preparado?</h2></div>
+  <div class="card"><ul>
+    <li>Sei contar a lenda e explicar o que a Arqueologia diz.</li><li>Sei os 3 períodos e as datas.</li>
+    <li>Sei os grupos sociais e as magistraturas.</li><li>Sei as conquistas da plebe, em ordem.</li>
+    <li>Sei as 3 Guerras Púnicas e o Mare Nostrum.</li><li>Sei a crise da República, os Graco e os triunviratos.</li>
+    <li>Sei como Otávio virou Augusto e como era a sucessão.</li><li>Sei economia, arquitetura, pão e circo, família e deuses.</li>
+    <li>Sei pax romana e romanização.</li><li>Sei latim (vulgar × clássico), Direito romano e o cristianismo (313 e 380).</li></ul></div>
+
+  <div class="fim" id="fim">
+    <h3 id="fim-h3">🔒 Próxima etapa: Simulado</h3>
+    <p id="fim-txt">Role até aqui e confirme a leitura para destravar o Simulado.</p>
+    <button id="btn-li" onclick="confirmarLeitura()" disabled>✅ Li o resumo até o fim</button>
+    <a class="btn off" id="btn-prox" href="simulado.html">📝 Pronto para o Simulado!</a>
+  </div>
+
+  <div class="rodape">Feito com carinho para o jovem aprendiz. 🛣️ Todos os caminhos levam à boa prova!</div>
+</div>
+
+<div class="modal-bg" id="lock">
+  <div class="modal">
+    <div class="big">🔒</div>
+    <p><b>Esta etapa ainda está trancada.</b></p>
+    <p id="lock-txt">Para abrir o Resumo, envie o Quiz.</p>
+    <a href="index.html">Voltar ao início</a>
+  </div>
+</div>
+
+<script>
+/* ====== TRILHA COM CADEADOS (módulo comum do kit) ====== */
+var KIT='caminhos_hist6';
+var TRILHA=[
+ {id:'leitura', chave:KIT+'_leitura_v1', nome:'Leitura Guiada', arquivo:'leitura-guiada.html', emoji:'📖'},
+ {id:'quiz', chave:KIT+'_quiz_v1', nome:'Quiz', arquivo:'quiz.html', emoji:'🎯'},
+ {id:'resumo', chave:KIT+'_resumo_v1', nome:'Resumo', arquivo:'resumo.html', emoji:'🗺️'},
+ {id:'simulado', chave:KIT+'_simulado_v1', nome:'Simulado', arquivo:'simulado.html', emoji:'📝'}
+];
+function lerJSON(k){ try{ var s=localStorage.getItem(k); return s?JSON.parse(s):null; }catch(e){ return null; } }
+function trilhaLiberada(){ var t=lerJSON(KIT+'_trilha_v1'); return !!(t&&t.liberadoPelosPais); }
+function etapaConcluida(id){ var e=TRILHA.filter(function(t){return t.id===id;})[0]; var d=lerJSON(e.chave); return !!(d&&d.concluido); }
+function podeAbrir(id){ var idx=TRILHA.map(function(t){return t.id;}).indexOf(id); if(idx<=0||trilhaLiberada()) return true; return etapaConcluida(TRILHA[idx-1].id); }
+function marcarNav(){
+  var links=document.querySelectorAll('#nav a[data-etapa]');
+  for(var i=0;i<links.length;i++){ var id=links[i].getAttribute('data-etapa'); if(!podeAbrir(id)){ links[i].classList.add('lock'); links[i].textContent='🔒 '+links[i].textContent.replace('🔒 ',''); } else { links[i].classList.remove('lock'); links[i].textContent=links[i].textContent.replace('🔒 ',''); } }
+}
+function checarTrava(){
+  if(podeAbrir('resumo')) return true;
+  var L=lerJSON(KIT+'_leitura_v1');
+  document.getElementById('lock-txt').textContent=(L&&L.concluido)?'Para abrir o Resumo, envie o Quiz.':'Para abrir o Resumo, conclua a Leitura Guiada e envie o Quiz.';
+  document.getElementById('lock').classList.add('show');
+  document.querySelector('.wrap').style.filter='blur(6px)';
+  return false;
+}
+
+/* ====== ESTADO DO RESUMO ====== */
+var CHAVE=KIT+'_resumo_v1'; var mem={}; var estado=carregar();
+function carregar(){ try{ var s=localStorage.getItem(CHAVE); if(s) return JSON.parse(s);}catch(e){ if(mem[CHAVE]) return JSON.parse(mem[CHAVE]); } return {rolagemMax:0}; }
+function salvar(){ var s=JSON.stringify(estado); try{ localStorage.setItem(CHAVE,s);}catch(e){ mem[CHAVE]=s; } document.getElementById('salvo').textContent='📏 Rolagem máxima: '+Math.round(estado.rolagemMax||0)+'%'; }
+function medirRolagem(){
+  var h=document.documentElement; var total=h.scrollHeight-h.clientHeight; var pct= total<=0?100:Math.min(100,(window.scrollY||h.scrollTop)/total*100);
+  if(pct>(estado.rolagemMax||0)){ estado.rolagemMax=pct; salvar(); }
+  var b=document.getElementById('btn-li'); if(!estado.concluido && (estado.rolagemMax||0)>=90){ b.disabled=false; }
+}
+function confirmarLeitura(){ if(estado.concluido) return; estado.concluido=true; estado.concluidoEm=new Date().toISOString(); salvar(); atualizarFim(); }
+function atualizarFim(){
+  var h3=document.getElementById('fim-h3'), txt=document.getElementById('fim-txt'), b=document.getElementById('btn-li'), a=document.getElementById('btn-prox');
+  if(estado.concluido||trilhaLiberada()){ h3.textContent='✅ Resumo lido — Simulado destravado!'; txt.textContent=estado.concluido?'Agora encare o Simulado valendo, como se fosse a prova.':'Trilha liberada pelos pais.'; b.disabled=true; b.textContent=estado.concluido?'✅ Resumo concluído':'✅ Li o resumo até o fim'; a.classList.remove('off'); }
+  else { h3.textContent='🔒 Próxima etapa: Simulado'; txt.textContent=(estado.rolagemMax||0)>=90?'Confirme a leitura para destravar o Simulado.':'Role até o fim da página para habilitar o botão (rolagem: '+Math.round(estado.rolagemMax||0)+'%).'; a.classList.add('off'); }
+  marcarNav();
+}
+function exportar(){ var blob=new Blob([JSON.stringify(estado,null,2)],{type:'application/json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='resumo_todos-os-caminhos.json'; a.click(); }
+
+if(checarTrava()){ salvar(); atualizarFim(); window.addEventListener('scroll',function(){ medirRolagem(); atualizarFim(); }); setTimeout(medirRolagem,300); } else { marcarNav(); }
+</script>
+</body>
+</html>
